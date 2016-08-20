@@ -1,0 +1,175 @@
+\documentclass[10pt]{extarticle}
+
+\usepackage{amsfonts,amsmath,amsthm,amsbsy,latexsym,amssymb,graphicx,booktabs,fancybox,color,multicol,manfnt,fullpage,lscape,url}
+\usepackage[colorlinks]{hyperref}
+\hypersetup{allcolors = blue}
+\parindent 0ex
+\usepackage{enumitem}
+\setlist{nolistsep}
+\usepackage{courier}
+\renewcommand*\familydefault{\ttdefault} %% Only if the base font of the document is to be typewriter style
+\usepackage[T1]{fontenc}
+\usepackage[top=1in, bottom=1in, left=1in, right=1in]{geometry}
+
+
+\title{SYLLABUS}
+\author{\Large MATH 408-01 (CSCI 408-01) \ Cryptography}
+\date{Fall 2016}
+
+\usepackage[x11names,table]{xcolor}
+\usepackage{pgf,tikz}
+\usetikzlibrary{calendar}
+\usetikzlibrary{calc,arrows,decorations.pathreplacing}
+\usepackage{tkz-euclide}
+\usetkzobj{all}
+
+
+\begin{document}
+\normalfont
+
+\begin{center}\includegraphics[width=2.5in]{Classified.jpg}\end{center}
+{\let\newpage\relax\maketitle}
+
+\framebox[\textwidth][c]{\large \textsc{Head of Agency}}
+\vspace{6pt}
+
+\begin{tabular}{p{3cm} l}
+Agent:			& Dr. Ho (Code Name: Anne)\\
+Office:				& Wall 124B \\
+Telephone: 		& 843-349-4075 \\
+E-mail:				& \url{aho@coastal.edu} \\
+Office Hours:	& M 2-3:30pm, T 10:15-11am, W 1:30-3:30pm, F 9-10am\\
+Outreach: & MW 12:30-1:30pm on the second floor of the library\\
+\end{tabular}
+
+
+\vspace{12pt}
+\framebox[\textwidth][c]{\large \textsc{Description}}
+\vspace{2pt}
+
+\begin{tabular}{p{3cm} p{12.6cm}}
+Schedule:	&  TTh 3:05-4:20pm Wall 309 (8/23/16-12/6/16)
+\\
+\\
+
+Prerequisite: &  A grade of C or better in MATH 220 or MATH 174.\\
+\\
+
+Textbook:	& \emph{Introduction to Cryptography with Coding Theory} (2\textsuperscript{nd} edition) by Trappe and Washington \\
+\\
+
+Software: & We will be using SageMath (\url{https://cloud.sagemath.com}), which is a Python-based open-source math software system.\\ \\
+
+
+Moodle: & I will be using Moodle (\url{http://moodle.coastal.edu}) to post training materials and grades.\\
+\\
+Topics:	& Modular arithmetic, classical encryption schemes, modern encryption schemes, password security, digital signatures, and secret sharing.\\
+\\
+
+Objectives: & We will cover the fundamentals of cryptography and current-day issues through computational, proof-based, and coding exercises.  \\ \\
+\end{tabular}
+
+\bigskip
+
+
+\emph{\bf Priority Missions (aka Exams):} There will be three opportunities (take-home\\
+exams) for you to demonstrate your expanding set of secret agent skills on:
+\begin{itemize}
+\item Thursday, 9/29 at 11:59pm
+\item Thursday, 10/27 at 11:59pm
+\item Thursday, 12/15 at 11:59pm
+\end{itemize}
+
+\bigskip
+
+\emph{\bf Missions (aka Assignments):}
+Missions consist of homework and in-class\\
+assignments. Doing all of the missions is necessary for you to pass.\\
+You are encouraged to discuss problems with fellow agents-in-training.\\
+In fact, if you help someone with a mission, you will get one extra credit\\
+point per assignment (up to 10 points throughout the semester, and up to\\
+100\% on your assignments grade).  If you receive help on a mission,\\
+you must write down the name of the person who helped you.  Helping\\
+someone is \emph{not} doing the assignment for the other person though,\\
+and you are still expected to individually write up your solutions.  You are\\
+responsible for your own understanding of the material. \emph{Absolutely\\
+no late assignments will be accepted}. If you must be gone, turn in your\\
+assignments early. Please ask questions!
+
+\vspace{10pt}
+
+\emph{\bf Grade Guidelines:}  Assignments (Missions) = 40\%, Exams (Priority Missions) = 60\%
+
+
+\vspace{10pt}
+
+\emph{\bf Grade Scale:}
+A = 90-100\%, B = 80-89\%, C = 70-79\%, D = 60-69\%, F = below 60\%
+	
+\vspace{10pt}
+
+\noindent
+\textbf{Important Dates:}
+\begin{center}
+\begin{tabular}{ll}
+Monday, Sept 5 & Labor Day holiday\\
+Friday, Oct 7 & Student holiday\\
+Thursday, Oct 27 &Last day to drop with grade of ``W"\\
+Tuesday, Nov 8 & Election Day\\
+Nov 21--25 &Thanksgiving break\\
+Wednesday, Dec 7 & Last day of classes\\
+\end{tabular}
+\end{center}
+
+\vspace{12 pt}
+\noindent
+\textbf{Students with Disabilities:}  Any student with a documented\\
+disability needing academic adjustments is requested to speak with me during the\\
+first week of class.  All discussions will remain confidential.
+
+\vspace{10pt}
+
+\noindent
+
+\textbf{Attendance Policy:} Students are obligated to attend class regularly.\\
+Absences, excused or not, do not absolve students from the responsibility\\
+of completing all assigned work promptly. Read the following for details:\\
+ \url{http://www.coastal.edu/policies/pdf/acad-125classattendance.pdf}.
+
+\bigskip
+
+\noindent
+\textbf{Statement of Academic Integrity:} CCU is an academic community that\\
+expects the highest standards of honesty, integrity and personal responsibility.\\
+Members of  this community are accountable for their actions and reporting the\\
+inappropriate action of others and are committed to creating an atmosphere of\\
+mutual respect and trust. Please review the revised Code of Conduct that is\\
+available at: \url{https://www.coastal.edu/conduct/}
+
+\bigskip
+
+\centerline{\bf Math 408 / CSCI 408 - Student Learning Outcomes}
+Upon successful completion of the course, agents will be able to:
+
+\vspace{.5cm}
+\begin{enumerate}
+\item Solve basic number theory problems involving modular arithmetic, primes,\\
+factoring, the Euclidean algorithm, and the Chinese Remainder Theorem.
+\item Utilize classical ciphers for encryption and decryption.
+\item Be familiar with possible attacks and cryptanalysis of classical ciphers.
+\item Understand and use the Data Encryption Standard.
+\item Understand and use RSA as well as attacks on RSA.
+\item Understand and use ElGamal and the Digital Signature Algorithm.
+\item Be comfortable with basic coding problems in SageMath (Python).
+\item Be familiar with current issues and research, including quantum cryptography.
+\end{enumerate}
+
+\vfill
+
+\begin{center}
+\footnotesize{The syllabus is for planning purpose only and is subject to change anytime.}
+\end{center}
+\newpage
+
+
+\end{document} 
