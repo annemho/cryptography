@@ -20,7 +20,7 @@ primarily focusing on data encryption and decryption.
 I am teaching this course during the Fall 2016 semester, so new material 
 will be updated from now until December.
 
-Files:
+Files (mostly .tex files and necessary files to compile as well as .sagews code)
 
 --Homework assignments (Missions) and solutions
 
