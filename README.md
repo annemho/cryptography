@@ -31,8 +31,8 @@ Files:
 --Day-by-Day Calendar
 
 --Some SageMath code, much of this is based on Kate Stange's (CU 
-Boulder) course
+Boulder) course.  All of my code is short and can be run on https://sagecell.sagemath.org/
 
-Lecture notes are currently handwritten and will be added in the future 
+Lecture notes are currently handwritten and might be added in the future 
 (either as scans or as .tex files). Please contact me (currently at 
 aho@coastal.edu) with any questions.
