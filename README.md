@@ -22,16 +22,16 @@ will be updated from now until December.
 
 Files:
 
---Homework assignments and solutions
+--Homework assignments (Missions) and solutions
 
 --Handouts and in-class activities
 
 --Syllabus
 
---Day-by-Day Calendar
-
 --Some SageMath code, much of this is based on Kate Stange's (CU 
 Boulder) course.  All of my code is short and can be run on https://sagecell.sagemath.org/
+
+The Day One Cryptography presentation can be found here: http://tinyurl.com/16AnneHoCrypto
 
 Lecture notes are currently handwritten and might be added in the future 
 (either as scans or as .tex files). Please contact me (currently at 

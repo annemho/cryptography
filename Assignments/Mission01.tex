@@ -1,0 +1,87 @@
+\documentclass[12pt]{amsart}
+\pagestyle{plain}
+
+\usepackage{amsthm, setspace, framed, hyperref}
+\usepackage[pdftex]{graphicx}
+\usepackage{enumerate}
+
+\usepackage[left=1in, right=1in, top=1in, bottom=1in]{geometry}
+\setlength\parindent{0pt}
+
+\theoremstyle{plain}
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem*{cor}{Corollary}
+\newtheorem{quest}{Question}
+\theoremstyle{definition}
+\newtheorem*{defn}{Definition}
+\newtheorem*{ex}{Example}
+
+\begin{document}
+\title[]{Cryptography Mission 01 Dossier}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}l l}
+MATH/CSCI 408  & Name: \rule{7cm}{0.5pt} \\
+\hline\hline
+\end{tabular*} \\
+\maketitle
+
+\begin{center}\textbf{Deadline: Thursday, 1 September 2016 at 3:05pm}\\
+
+This mission covers Sections 2.1, 2.2, and 2.3.
+\end{center}
+
+\begin{framed}
+Check one:\\
+
+\framebox(12,12){} I received help from the following classmate(s) on this assignment:\\
+
+\rule{15cm}{0.5pt}.\\
+
+\framebox(12,12){} I did not receive any help on this assignment.
+\end{framed}
+
+\section*{Homework Rules}
+\begin{itemize}
+	\item All work must be shown for full credit!
+	\item You may work with classmates, but be sure to turn in your own written solutions.  Write down the name(s) of anyone who helps you.
+	\item You can choose to use SageMath code to help you solve the problems.  If you use code, please send the code to Dr. Ho.
+\end{itemize}
+
+
+\section{Graded Problems}
+
+\begin{enumerate}[1.]
+	\item Do the following survey: \url{http://tinyurl.com/16AnneHoSurvey}\\
+	\item (T\&W 2.13 \# 4)  Consider an affine cipher ($\bmod 26$).  You do a chosen plaintext attack using \texttt{hahaha}.  The ciphertext is \texttt{NONONO}.  Determine the encryption function.\\ \begin{framed}\vspace{2in}\end{framed}
+	 \newpage \item This problem involves the Dancing Men code from a Sherlock Holmes story.
+		\begin{center}
+			\includegraphics[height=1in]{Sherlock.jpg}\\
+			\tiny{(Image from \url{http://www.cultbox.co.uk/reviews/episodes/sherlock-2016-special-review-the-abominable-bride}.)}
+		\end{center}
+		
+		\begin{enumerate}[a.]
+			\item Read Section 2.5 (Sherlock Holmes), and describe (in a paragraph) how Sherlock figures out which dancing man represents the letter \texttt{e} as well as the letter \texttt{r}.\\ \begin{framed}\vspace{2in}\end{framed}
+			\item Explain in one sentence what the little flags mean.\\\begin{framed}\vspace{1in}\end{framed}
+			\item Draw the dancing men figures that would correspond to the plaintext: \texttt{math}.\\ \begin{framed}\vspace{1.5in}\end{framed}
+		\end{enumerate}
+		\newpage \item (T\&W 2.14 \# 2)  The following ciphertext was the output of a shift cipher:
+		\begin{center}
+			\texttt{LCLLEWLJAZLNNZMVYIYLHRMHZA}
+		\end{center}
+		By performing a frequency count, guess the key used in the cipher.  What is the decrypted plaintext?\\ \begin{framed}\vspace{2in}\end{framed}
+	\item SageMathCloud:\\
+		\begin{enumerate}[a.]
+			\item Set up a SageMathCloud account (\url{https://cloud.sagemath.com}).  Create a new project (Cryptography).  You can use this project folder to hold all of your SageMath code.  \\
+			\item From Moodle (\url{https://moodle.coastal.edu/}), download Dr. Ho's Vigenere cipher code (Vigenere Cipher.sagews) and upload it to your SageMathCloud project folder.\\
+			\item Run through the cells of code, and then encode the phrase, ``Hey, Mr. Tambourine Man, play a song for me" by using the key word ``DYLAN".  Write down the ciphertext.  Be sure to print your code or email it to Dr. Ho too.\\ \begin{framed}\vspace{.5in}\end{framed}
+		\end{enumerate}
+\end{enumerate}
+
+\section{Recommended Exercises}
+\noindent These will not be graded but are recommended if you need more practice.
+\begin{itemize}
+	\item Section 2.1.3: \# 1, 3, 7, 11
+	\item Section 2.1.4: \# 1, 6
+\end{itemize}
+	
+\end{document}
