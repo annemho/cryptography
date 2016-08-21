@@ -1,0 +1,169 @@
+\documentclass[12pt]{amsart}
+\pagestyle{plain}
+
+\usepackage{amsthm, setspace, framed}
+\usepackage[none]{hyphenat}
+\usepackage[pdftex]{graphicx}
+\usepackage{enumerate}
+\usepackage{courier}
+\makeatletter
+\def\@settitle{\begin{center}%
+  \baselineskip14\p@\relax
+  \bfseries
+  \uppercasenonmath\@title
+  \@title
+  \ifx\@subtitle\@empty\else
+     \\[1ex]\uppercasenonmath\@subtitle
+     \footnotesize\mdseries\@subtitle
+  \fi
+  \end{center}%
+}
+\def\subtitle#1{\gdef\@subtitle{#1}}
+\def\@subtitle{}
+\makeatother
+
+\setlength{\textwidth}{6.0in}
+\setlength{\textheight}{8.8in}
+\setlength{\oddsidemargin}{0.25in}
+\setlength{\evensidemargin}{0.25in}
+\setlength{\topmargin}{0in}
+
+\theoremstyle{plain}
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem*{cor}{Corollary}
+\newtheorem{quest}{Question}
+
+\theoremstyle{definition}
+\newtheorem*{defn}{Definition}
+\newtheorem*{ex}{Example}
+
+\theoremstyle{remark}
+\newtheorem*{rem}{Remark}
+\newtheorem*{note}{Note}
+\newtheorem{case}{Case}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\Rnn}{\R^{n\times n}} 
+\newcommand{\Rn}{\R^{n}} 
+
+\newcommand{\bx}{{\bf x}}
+\newcommand{\bv}{{\bf v}}
+\newcommand{\bw}{{\bf w}}
+\newcommand{\bu}{{\bf u}}
+
+\newcommand{\bit}{\begin{itemize}}
+\newcommand{\eit}{\end{itemize}}
+\newcommand{\ben}{\begin{enumerate}}
+\newcommand{\een}{\end{enumerate}}
+\newcommand{\bea}{\begin{eqnarray*}}
+\newcommand{\eea}{\end{eqnarray*}}
+\newcommand{\bpf}{\begin{proof}}
+\newcommand{\epf}{\end{proof}\ms}
+\newcommand{\bthm}{\begin{thm}}
+\newcommand{\ethm}{\end{thm}}
+\newcommand{\bdefn}{\begin{defn}}
+\newcommand{\edefn}{\end{defn}}
+\newcommand{\bex}{\begin{ex}}
+\newcommand{\eex}{\end{ex}}
+\newcommand{\bde}{\begin{description}}
+\newcommand{\ede}{\end{description}}
+\newcommand{\bcen}{\begin{center}}
+\newcommand{\ecen}{\end{center}}
+\newcommand{\bq}{\begin{quest}}
+\newcommand{\eq}{\end{quest}}
+
+\begin{document}
+
+\onehalfspacing
+
+\title[]{Cryptography Handout 01}
+\subtitle{Shift and Affine Ciphers}
+\maketitle
+
+\section{Shift (Caesar) Cipher}
+
+Assign each letter a number:
+
+\bcen
+\begin{tabular}{|p{.25in}|p{.25in}|p{.25in}|p{.25in}|p{.25in}|p{.25in}|p{.25in}|p{.25in}|p{.25in}|p{.25in}|p{.25in}|p{.25in}|p{.25in}|}\hline
+a & b & c & d & e & f & g & h & i & j & k & l & m\\
+0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 \\ \hline
+n & o & p & q & r & s & t & u & v & w & x & y & z\\
+13 &14 & 15 & 16 & 17 & 18 & 19 & 20 & 21 & 22 & 23 & 24 & 25\\ \hline
+\end{tabular}
+\ecen
+
+\bex
+(Caesar's cipher) Shift each letter by three places.
+
+\bcen
+\begin{tabular}{|p{.25in}|p{.25in}|p{.25in}|p{.25in}|p{.25in}|p{.25in}|p{.25in}|p{.25in}|p{.25in}|p{.25in}|p{.25in}|p{.25in}|p{.25in}|}\hline
+a & b & c & d & e & f & g & h & i & j & k & l & m\\
+\texttt{D} & \texttt{E} & \texttt{F} & \texttt{G} & \texttt{H} & \texttt{I} & \texttt{J} & \texttt{K} & \texttt{L} & \texttt{M} & \texttt{N} & \texttt{O} & \texttt{P} \\ \hline
+n & o & p & q & r & s & t & u & v & w & x & y & z\\
+\texttt{Q} & \texttt{R} & \texttt{S} & \texttt{T} & \texttt{U} & \texttt{V} & \texttt{W} & \texttt{X} & \texttt{Y} & \texttt{Z} & \texttt{A} & \texttt{B} & \texttt{C}\\ \hline
+\end{tabular}
+\ecen
+
+
+\bit
+	\item We can think of encryption as $x \mapsto x + \kappa (\bmod 26)$ where $\kappa = 3$.\\
+	Plaintext: ``caesar"\\
+	\texttt{CIPHERTEXT}: \\
+	\item Decryption is $x \mapsto x - \kappa (\bmod 26)$ where $\kappa = 3$.
+\eit
+\eex
+
+\bex Encrypt ``conquer" using $\kappa = 6$.
+%\bcen
+%\begin{tabular}{|p{.25in}|p{.25in}|p{.25in}|p{.25in}|p{.25in}|p{.25in}|p{.25in}|p{.25in}|p{.25in}|p{.25in}|p{.25in}|p{.25in}|p{.25in}|}\hline
+%a & b & c & d & e & f & g & h & i & j & k & l & m\\
+%&&&&&&&&&&&& \\ \hline
+%n & o & p & q & r & s & t & u & v & w & x & y & z\\
+%&&&&&&&&&&&& \\ \hline
+%\end{tabular}
+%\ecen
+\vspace{1in}
+\eex
+
+
+\bex Decrypt ``\texttt{GPISTEXVE}" using $\kappa = 4$.
+\vspace{1in}
+\eex
+
+
+\newpage \section{Affine Ciphers}
+\bex
+Use $x \mapsto 9 x+ 2  (\bmod 26)$.
+
+\bit
+	\item We can think of encryption as $x \mapsto \alpha x + \beta (\bmod 26)$ where $\alpha = 9$ and $\beta = 2$.\\
+	Plaintext: ``caesar"\\
+	\texttt{CIPHERTEXT}: \\
+	\item Decryption uses the inverse function:
+	\begin{align*}
+	9x + 2 &= y\\
+	9x &= y-2\\
+	x &= \frac{1}{9}(y-2)\\
+	x &= 9^{-1}(y-2)\\
+	x &= 3(y-2)\\
+	x &= 3y-6\\
+	x &= 3y+20
+	\end{align*}
+	\item Check the decryption:
+	\vspace{1in}
+\eit
+\eex
+
+\bex
+Encrypt ``rome" using $x \mapsto 3x+1$ and then find the inverse function.
+\eex
+
+
+	
+\end{document}
