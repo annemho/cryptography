@@ -1,4 +1,4 @@
-︠192b679c-5e09-4b80-b46f-861958512642s︠
+︠192b679c-5e09-4b80-b46f-861958512642︠
 '''
 Purpose: To provide a basic overview to SageMath.  This is a commented section.  Everything in this block is commented out.
 Inputs:
@@ -8,7 +8,6 @@ Notes:
     - It is good practice to write an input and output for your code, and to comment your code throughout (for your own sake and for others who will read your code).  For the purpose of this exercise and because there are many snippets of computations, the overall inputs and outputs will be left blank at this top section.
     -For smaller comments throughout your code, use #.
     - SageMath will execute code by cells.
-    - This code is modified from the awesome work done by Kate Stange (CU Boulder).
 '''
 #You can ask SageMath to do basic computations.
 2+2 
