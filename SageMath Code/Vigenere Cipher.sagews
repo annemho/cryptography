@@ -41,7 +41,7 @@ ciphertext #Displays encrypted message.
 '''
 Purpose: To provide a second example of Vigenere decryption.
 Inputs:
-    - ciphertext = text to dencode (Make sure you designate the length of the keyword too)
+    - ciphertext = text to decode (Make sure you designate the length of the keyword too)
     - key = keyword (HELLO is the example)
 Outputs:
     - decrypted text
