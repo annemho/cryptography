@@ -1,0 +1,144 @@
+\documentclass[12pt]{amsart}
+\pagestyle{plain}
+
+\usepackage{amsthm, setspace, framed, url, hyperref, lscape}
+\usepackage[none]{hyphenat}
+\usepackage[pdftex]{graphicx}
+\usepackage{enumerate}
+\usepackage{tikz}
+\usepackage{courier}
+\makeatletter
+\def\@settitle{\begin{center}%
+  \baselineskip14\p@\relax
+  \bfseries
+  \uppercasenonmath\@title
+  \@title
+  \ifx\@subtitle\@empty\else
+     \\[1ex]\uppercasenonmath\@subtitle
+     \footnotesize\mdseries\@subtitle
+  \fi
+  \end{center}%
+}
+\def\subtitle#1{\gdef\@subtitle{#1}}
+\def\@subtitle{}
+\makeatother
+
+\setlength{\textwidth}{6.0in}
+\setlength{\textheight}{8.8in}
+\setlength{\oddsidemargin}{0.25in}
+\setlength{\evensidemargin}{0.25in}
+\setlength{\topmargin}{0in}
+
+\theoremstyle{plain}
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem*{cor}{Corollary}
+\newtheorem{quest}{Question}
+
+\theoremstyle{definition}
+\newtheorem*{defn}{Definition}
+\newtheorem*{ex}{Example}
+
+\theoremstyle{remark}
+\newtheorem*{rem}{Remark}
+\newtheorem*{note}{Note}
+\newtheorem{case}{Case}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\Rnn}{\R^{n\times n}} 
+\newcommand{\Rn}{\R^{n}} 
+
+\newcommand{\bx}{{\bf x}}
+\newcommand{\bv}{{\bf v}}
+\newcommand{\bw}{{\bf w}}
+\newcommand{\bu}{{\bf u}}
+
+\newcommand{\bit}{\begin{itemize}}
+\newcommand{\eit}{\end{itemize}}
+\newcommand{\ben}{\begin{enumerate}}
+\newcommand{\een}{\end{enumerate}}
+\newcommand{\bea}{\begin{eqnarray*}}
+\newcommand{\eea}{\end{eqnarray*}}
+\newcommand{\bpf}{\begin{proof}}
+\newcommand{\epf}{\end{proof}\ms}
+\newcommand{\bthm}{\begin{thm}}
+\newcommand{\ethm}{\end{thm}}
+\newcommand{\bdefn}{\begin{defn}}
+\newcommand{\edefn}{\end{defn}}
+\newcommand{\bex}{\begin{ex}}
+\newcommand{\eex}{\end{ex}}
+\newcommand{\bde}{\begin{description}}
+\newcommand{\ede}{\end{description}}
+\newcommand{\bcen}{\begin{center}}
+\newcommand{\ecen}{\end{center}}
+\newcommand{\bq}{\begin{quest}}
+\newcommand{\eq}{\end{quest}}
+
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
+
+\begin{document}
+
+\onehalfspacing
+
+\title[]{Cryptography Handout 04}
+\subtitle{Playfair Cipher}
+\maketitle
+
+The following will walk you through a Playfair Cipher example.  Recall that the Playfair cipher uses a $5\times 5$ grid to encrypt a message.
+
+\section{Encrypting Using Playfair}
+\begin{enumerate}[1.]
+	\item Choose a key word (no longer than 8 letters for now).\\ \vspace{.5in}
+	\item Write these in the following $5 \times 5$ grid.  Keep in mind $i = j$.  Then fill in the rest of the grid/matrix with the rest of the letters in the alphabet (no repeated letters and in alphabetical order):\\
+	\begin{center}
+		\begin{tabular}{|p{.5in}|p{.5in}|p{.5in}|p{.5in}|p{.5in}|} \hline
+		&&&&\\\hline
+		&&&&\\\hline
+		&&&&\\\hline
+		&&&&\\\hline
+		&&&&\\ \hline
+		\end{tabular}
+	\end{center}
+	\item Write a one-line message:\\ \vspace{.5in}
+	\item Remove spaces and punctuation.  Divide the text into groups of two letters.  Add an extra $x$ at the end of the final group, if necessary.\\ \vspace{1in}
+	\newpage \item Encrypt your message using the following rules:
+		\begin{enumerate}[a.]
+			\item If 2 letters are not in the same row or column, replace each letter by the letter that is in its row and is in the column of the other letter.\\
+			\item If 2 letters are in the same row, replace each letter with the letter immediately to its right, with the grid/matrix wrapping around from the last column to the first.\\
+			\item If 2 letters are in the same column, replace each letter with the letter immediately below it, with the grid/matrix wrapping around from the last row to the first.\\
+		\end{enumerate}
+		\vspace{1.5in}
+	\item You're now going to give another group your encrypted message.  Recopy your $5 \times 5$ grid/matrix on the provided paper, and also recopy your encrypted ciphertext (see last page).\\
+\end{enumerate}
+
+\section{Decrypting a Playfair Message}
+You should have received a sheet with a Playfair cipher grid/matrix and some encrypted ciphertext.  Use the rules to determine what the original message said.
+
+\newpage
+From (group name): \underline{\hspace{3in}}\\
+
+To (group name):   \underline{\hspace{3in}}\\
+	\begin{center}
+		\begin{tabular}{|p{.5in}|p{.5in}|p{.5in}|p{.5in}|p{.5in}|} \hline
+		&&&&\\\hline
+		&&&&\\\hline
+		&&&&\\\hline
+		&&&&\\\hline
+		&&&&\\ \hline
+		\end{tabular}
+	\end{center}
+	
+Message (ciphertext):\\ \vspace{2.5in}
+
+Encrypted message (plaintext):
+
+
+
+
+
+\end{document}
