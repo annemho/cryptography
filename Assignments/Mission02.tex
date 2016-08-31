@@ -1,0 +1,98 @@
+\documentclass[12pt]{amsart}
+\pagestyle{plain}
+
+\usepackage{amsthm, setspace, framed, hyperref}
+\usepackage[pdftex]{graphicx}
+\usepackage{enumerate}
+
+\usepackage[left=1in, right=1in, top=1in, bottom=1in]{geometry}
+\setlength\parindent{0pt}
+
+\theoremstyle{plain}
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem*{cor}{Corollary}
+\newtheorem{quest}{Question}
+\theoremstyle{definition}
+\newtheorem*{defn}{Definition}
+\newtheorem*{ex}{Example}
+
+\begin{document}
+\title[]{Cryptography Mission 02 Dossier}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}l l}
+MATH/CSCI 408  & Name: \rule{7cm}{0.5pt} \\
+\hline\hline
+\end{tabular*} \\
+\maketitle
+
+\begin{center}\textbf{Deadline: Thursday, 8 September 2016 at 3:05pm}\\
+
+This mission covers Sections 2.4, 2.6, and 2.7.
+\end{center}
+
+\begin{framed}
+Check one:\\
+
+\framebox(12,12){} I received help from the following classmate(s) on this assignment:\\
+
+\rule{15cm}{0.5pt}.\\
+
+\framebox(12,12){} I did not receive any help on this assignment.
+\end{framed}
+
+
+\section{Graded Problems}
+
+\begin{enumerate}[1.]
+	\item Read the Wikipedia article on the Pigpen cipher:\\ \url{https://en.wikipedia.org/wiki/Pigpen_cipher}.
+	\begin{enumerate}[a.]
+	\item Replicate the set of all graphical symbols on your homework here:
+	\begin{framed}
+	\vspace{1.8in}
+	\end{framed}
+	\item Encrypt the message ``you only live twice" using the Pigpen cipher.
+	\begin{framed}
+	\vspace{2in}
+	\end{framed}
+	\end{enumerate}
+	\item On Moodle, download and work through the ``Encryption.sagews" code.\\
+		\begin{enumerate}[a.]
+		\item Using the Caesar cipher with a shift of 12, encrypt ``Julius No".\\
+		\begin{framed}
+		\vspace{1in}
+		\end{framed}
+		\item Follow the link mentioned in the SageMath code (recopied here: \url{http://doc.sagemath.org/html/en/reference/cryptography/sage/crypto/classical.html}).  Read through the documentation of the TranspositionCipher.  In a sentence or two, describe what the Transposition Cipher does to a plaintext phrase:
+		\begin{framed}
+		\vspace{2.5in}
+		\end{framed}
+		\item Use some SageMath code and the Transposition Cipher to encrypt: ``\texttt{BABOUTHEOCELOT}" (note that normally, we use lowercase for plaintext, but we need all caps for this particular line of code).
+		\begin{framed}
+		\vspace{2in}
+		\end{framed}
+		\end{enumerate}
+	\newpage \item (T \& W 2.13 \# 14) The ciphertext \texttt{GEZXDS} was encrypted by a Hill cipher with a $2 \times 2$ matrix.  The plaintext is \texttt{solved}.  Find the encryption matrix $M$.
+	\begin{framed}
+	\vspace{2in}
+	\end{framed}
+		\item (T \& W 2.13 \# 16)
+		\begin{enumerate}[a.]
+		\item The ciphertext \texttt{ELNI} was encrypted by a Hill cipher with a $2 \times 2$ matrix.  The plaintext is \texttt{dont}.  Find the encryption matrix $M$.
+		\begin{framed}
+		\vspace{1.5in}
+		\end{framed}
+		\item Suppose the ciphertext is \texttt{ELNK} and the plaintext is still \texttt{dont}.  Find the encryption matrix.  Note that the second column of the matrix is changed.  This shows that the entire second column of the encryption matrix is involved in obtaining the last character of the ciphertext.
+		\begin{framed}
+		\vspace{2.5in}
+		\end{framed}
+		\end{enumerate}
+
+\end{enumerate}
+
+\section{Recommended Exercises}
+\noindent These will not be graded but are recommended if you need more practice.
+\begin{itemize}
+	\item Section 2.13: \# 13, 17, 24
+	\item Section 2.14: \# 10
+\end{itemize}
+	
+\end{document}
