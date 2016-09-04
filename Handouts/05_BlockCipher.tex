@@ -1,0 +1,134 @@
+\documentclass[12pt]{amsart}
+\pagestyle{plain}
+
+\usepackage{amsthm, setspace, framed, url, hyperref, lscape}
+\usepackage[none]{hyphenat}
+\usepackage[pdftex]{graphicx}
+\usepackage{enumerate}
+\usepackage{tikz}
+\usepackage{courier}
+\makeatletter
+\def\@settitle{\begin{center}%
+  \baselineskip14\p@\relax
+  \bfseries
+  \uppercasenonmath\@title
+  \@title
+  \ifx\@subtitle\@empty\else
+     \\[1ex]\uppercasenonmath\@subtitle
+     \footnotesize\mdseries\@subtitle
+  \fi
+  \end{center}%
+}
+\def\subtitle#1{\gdef\@subtitle{#1}}
+\def\@subtitle{}
+\makeatother
+
+\setlength{\textwidth}{6.0in}
+\setlength{\textheight}{8.8in}
+\setlength{\oddsidemargin}{0.25in}
+\setlength{\evensidemargin}{0.25in}
+\setlength{\topmargin}{0in}
+
+\theoremstyle{plain}
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem*{cor}{Corollary}
+\newtheorem{quest}{Question}
+
+\theoremstyle{definition}
+\newtheorem*{defn}{Definition}
+\newtheorem*{ex}{Example}
+
+\theoremstyle{remark}
+\newtheorem*{rem}{Remark}
+\newtheorem*{note}{Note}
+\newtheorem{case}{Case}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\Rnn}{\R^{n\times n}} 
+\newcommand{\Rn}{\R^{n}} 
+
+\newcommand{\bx}{{\bf x}}
+\newcommand{\bv}{{\bf v}}
+\newcommand{\bw}{{\bf w}}
+\newcommand{\bu}{{\bf u}}
+
+\newcommand{\bit}{\begin{itemize}}
+\newcommand{\eit}{\end{itemize}}
+\newcommand{\ben}{\begin{enumerate}}
+\newcommand{\een}{\end{enumerate}}
+\newcommand{\bea}{\begin{eqnarray*}}
+\newcommand{\eea}{\end{eqnarray*}}
+\newcommand{\bpf}{\begin{proof}}
+\newcommand{\epf}{\end{proof}\ms}
+\newcommand{\bthm}{\begin{thm}}
+\newcommand{\ethm}{\end{thm}}
+\newcommand{\bdefn}{\begin{defn}}
+\newcommand{\edefn}{\end{defn}}
+\newcommand{\bex}{\begin{ex}}
+\newcommand{\eex}{\end{ex}}
+\newcommand{\bde}{\begin{description}}
+\newcommand{\ede}{\end{description}}
+\newcommand{\bcen}{\begin{center}}
+\newcommand{\ecen}{\end{center}}
+\newcommand{\bq}{\begin{quest}}
+\newcommand{\eq}{\end{quest}}
+
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
+
+\begin{document}
+
+\onehalfspacing
+
+\title[]{Cryptography Handout 05}
+\subtitle{Block Ciphers}
+\maketitle
+
+\section{Matrix Facts}
+\begin{itemize}
+	\item The \textit{determinant} of a $2 \times 2$ matrix $M = \left( \begin{array}{rr}
+	a&b\\c&d\\
+	\end{array} \right)$ is $\det(M) = ad-bc$.
+	\item The \textit{inverse} of a matrix $M$ is denoted $M^{-1}$ and is the one in which $MM^{-1} = M^{-1}M = I$, where $I$ is the identity matrix.  For a $2 \times 2$ matrix $M = \left( \begin{array}{rr}
+	a&b\\c&d\\
+	\end{array} \right)$, the inverse is
+	$M^{-1} = \displaystyle \frac{1}{ad-bc}\left( \begin{array}{rr}
+	d&-b\\-c&a\\
+	\end{array} \right)$.
+\end{itemize}
+
+\vspace{.5in}
+
+\section{Hill Cipher}
+\begin{enumerate}[1.]
+	\item Choose an $n \times n$ matrix $M$.
+	\item Break the plaintext into vectors of length $n$ (using $a = 0, b = 1, \cdots, z = 25$).
+	\item To encrypt: multiply each vector by $M$ and reduce $\bmod 26$.
+	\item To decrypt: use multiplication with $M^{-1}$.
+\end{enumerate}
+
+\bex Suppose we know that $n = 2$ and the following plaintext and ciphertext correspondence:\\
+\begin{center}
+\begin{tabular}{ll}
+plaintext & \texttt{howareyoutoday}\\
+CIPHERTEXT & \texttt{ZWSENIUSPLJVEU}\\
+\end{tabular}
+\end{center}
+\eex
+
+\vspace{.5in}
+
+\section{Properties of Good Cryptosystems (Claude Shannon)}
+\begin{itemize}
+	\item \textbf{Diffusion}: if we change a character of the plaintext, then several characters of the ciphertext change too (and vice versa).
+	\item \textbf{Confusion}: the key isn't related to the ciphertext in an easy way, and each character of the ciphertext should depend on several parts of the key.
+\end{itemize}
+
+
+
+\end{document}
