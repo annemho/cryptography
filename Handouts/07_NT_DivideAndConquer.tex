@@ -1,0 +1,108 @@
+\documentclass[12pt]{amsart}
+\pagestyle{plain}
+
+\usepackage{amsthm, setspace, framed, url, hyperref, lscape}
+\usepackage[none]{hyphenat}
+\usepackage[pdftex]{graphicx}
+\usepackage{enumerate}
+\usepackage{tikz}
+\usepackage{courier}
+\makeatletter
+\def\@settitle{\begin{center}%
+  \baselineskip14\p@\relax
+  \bfseries
+  \uppercasenonmath\@title
+  \@title
+  \ifx\@subtitle\@empty\else
+     \\[1ex]\uppercasenonmath\@subtitle
+     \footnotesize\mdseries\@subtitle
+  \fi
+  \end{center}%
+}
+\def\subtitle#1{\gdef\@subtitle{#1}}
+\def\@subtitle{}
+\makeatother
+
+\setlength{\textwidth}{6.0in}
+\setlength{\textheight}{8.8in}
+\setlength{\oddsidemargin}{0.25in}
+\setlength{\evensidemargin}{0.25in}
+\setlength{\topmargin}{0in}
+
+\theoremstyle{plain}
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem*{cor}{Corollary}
+\newtheorem{quest}{Question}
+\theoremstyle{definition}
+\newtheorem*{defn}{Definition}
+\newtheorem*{ex}{Example}
+
+\begin{document}
+
+\onehalfspacing
+
+\title[]{Cryptography Handout 07}
+\subtitle{``Divide and Conquer"}
+
+\maketitle
+
+\begin{center}
+\emph{(adapted from \underline{Number Theory Through Inquiry} by Marshall, Odell, and Starbird)}
+\end{center}
+
+\section{Divisibility}
+In addition to understanding mathematical concepts, we need to practice communicating our understanding.  The next exercises will help you to practice writing mathematical explanations.\\
+
+\begin{ex}
+Here is an example of a mathematical statement (which we write as a \emph{theorem}) with a formal explanation of why it is true (written as a \emph{proof}).
+\begin{thm}
+Let $n$ be an integer.  If $6 \mid n$, then $3 \mid n$.
+\end{thm}
+\begin{proof}
+Suppose that $6 \mid n$.  Then by definition, there exists an integer $k$ such that $n = 6k$.  We want to show that there exists another integer $k'$ such that $n = 3k'$.  Since $n = 6k = 3(2k)$, then we can choose $k' = 2k$, which concludes that $3 \mid n$.
+\end{proof}
+\end{ex}
+
+\begin{center}\textbf{Now it's your turn to try writing some proofs.  Instructions:}\end{center}
+\begin{enumerate}[1.]
+	\item Read the theorem.
+	\item Come up with two examples with your partner(s) so that you believe it is true.
+	\item Individually write a mathematical proof (most of these will draw on definitions).
+	\item Switch papers and read your partner's proof.  Discuss the good parts as well as anything that is confusing.  \emph{Don't take any criticism of your writing personally!  Everyone is here to help each other, and the feedback is meant to be constructive.}
+\end{enumerate}
+
+\begin{thm}
+Let $a, b, c$ be integers.  If $a \mid b$ and $a \mid c$, then $a \mid (b+c).$
+\end{thm}
+
+\begin{thm}
+Let $a, b, c$ be integers.  If $a \mid b$ and $a \mid c$, then $a \mid bc$.
+\end{thm}
+
+\begin{thm}
+Let $a, b, c, n$ be integers with $n > 0$.  If $a \equiv b \bmod n$ and $b \equiv c \bmod n$, then $a \equiv c \bmod n$.
+\end{thm}
+
+\newpage \section{Euclidean Algorithm}
+
+First, let's get more familiar with the Euclidean Algorithm by doing some examples.  Run through the algorithm, and write down the steps for the following pairs of numbers.
+
+\begin{enumerate}[1.]
+	\item $a = 96, b = 112$
+	\item $a = 162, b = 31$
+\end{enumerate}
+
+Recall that two integers $a$ and $b$ are \emph{relatively prime} if $\gcd(a,b) = 1$.  It can be shown that an equivalent statement is that we can write that there exists integers $x$ and $y$ such that $ax+by = 1$.\\
+
+Let's do some more proof-writing practice.
+
+\begin{thm}
+Let $a, b, c$ be integers.  If $a \mid bc$ and $\gcd(a,b) = 1$, then $a \mid c$.
+\end{thm}
+
+\begin{thm}
+Let $a, b, n$ be integers.  If $\gcd(a,n) = 1$ and $\gcd(b,n) = 1$, then $\gcd(ab,n) = 1$.
+\end{thm}
+
+\end{document}

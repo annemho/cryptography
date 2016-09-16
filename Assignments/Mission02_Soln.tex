@@ -73,8 +73,8 @@ This mission covers Sections 2.4, 2.6, and 2.7.
 	\begin{tabular}{|cc|cc|} \hline
 	Plaintext & Vector & Plaintext & Vector\\ \hline
 	\texttt{so} & (18,14) & \texttt{GE} & (6,4)\\
-	\texttt{lv} & (11,21) & \texttt{ZX} & (6,4)\\
-	\texttt{ed} & (4,3) & \texttt{DS} & (6,4)\\ \hline
+	\texttt{lv} & (11,21) & \texttt{ZX} & (25,23)\\
+	\texttt{ed} & (4,3) & \texttt{DS} & (3,18)\\ \hline
 	\end{tabular}
 	If we choose the last two pairs to set up an encryption matrix, we won't have a problem with finding an inverse.\\
 	Let $M = \left( \begin{array}{rr}a&b\\c&d\\\end{array}\right)$ be the encryption matrix.
@@ -85,7 +85,7 @@ This mission covers Sections 2.4, 2.6, and 2.7.
 	&= \frac{-1}{51}\left( \begin{array}{rr}3&-21\\-4&11\\\end{array}\right)\left( \begin{array}{rr}25&23\\3&18\\\end{array}\right)\\
 	&= 25(25) \left( \begin{array}{rr}3&5\\22&11\\\end{array}\right)\left( \begin{array}{rr}25&23\\3&18\\\end{array}\right)\\
 	&= (1) \left( \begin{array}{rr}3&5\\22&11\\\end{array}\right)\left( \begin{array}{rr}25&23\\3&18\\\end{array}\right)\\
-	&\equiv \left( \begin{array}{rr}12&3\\11&22\\\end{array}\right) \bmod 26\\
+	&\equiv \left( \begin{array}{rr}12&3\\11&2\\\end{array}\right) \bmod 26\\
 	\end{align*}
 	\end{framed}
 		\item (T \& W 2.13 \# 16)

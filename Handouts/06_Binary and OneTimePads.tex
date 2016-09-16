@@ -1,0 +1,210 @@
+\documentclass[12pt]{amsart}
+\pagestyle{plain}
+
+\usepackage{amsthm, setspace, framed, url, hyperref, lscape}
+\usepackage[none]{hyphenat}
+\usepackage[pdftex]{graphicx}
+\usepackage{enumerate}
+\usepackage{tikz}
+\usepackage{courier}
+\makeatletter
+\def\@settitle{\begin{center}%
+  \baselineskip14\p@\relax
+  \bfseries
+  \uppercasenonmath\@title
+  \@title
+  \ifx\@subtitle\@empty\else
+     \\[1ex]\uppercasenonmath\@subtitle
+     \footnotesize\mdseries\@subtitle
+  \fi
+  \end{center}%
+}
+\def\subtitle#1{\gdef\@subtitle{#1}}
+\def\@subtitle{}
+\makeatother
+
+\setlength{\textwidth}{6.0in}
+\setlength{\textheight}{8.8in}
+\setlength{\oddsidemargin}{0.25in}
+\setlength{\evensidemargin}{0.25in}
+\setlength{\topmargin}{0in}
+
+\theoremstyle{plain}
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem*{cor}{Corollary}
+\newtheorem{quest}{Question}
+
+\theoremstyle{definition}
+\newtheorem*{defn}{Definition}
+\newtheorem*{ex}{Example}
+
+\theoremstyle{remark}
+\newtheorem*{rem}{Remark}
+\newtheorem*{note}{Note}
+\newtheorem{case}{Case}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\Rnn}{\R^{n\times n}} 
+\newcommand{\Rn}{\R^{n}} 
+
+\newcommand{\bx}{{\bf x}}
+\newcommand{\bv}{{\bf v}}
+\newcommand{\bw}{{\bf w}}
+\newcommand{\bu}{{\bf u}}
+
+\newcommand{\bit}{\begin{itemize}}
+\newcommand{\eit}{\end{itemize}}
+\newcommand{\ben}{\begin{enumerate}}
+\newcommand{\een}{\end{enumerate}}
+\newcommand{\bea}{\begin{eqnarray*}}
+\newcommand{\eea}{\end{eqnarray*}}
+\newcommand{\bpf}{\begin{proof}}
+\newcommand{\epf}{\end{proof}\ms}
+\newcommand{\bthm}{\begin{thm}}
+\newcommand{\ethm}{\end{thm}}
+\newcommand{\bdefn}{\begin{defn}}
+\newcommand{\edefn}{\end{defn}}
+\newcommand{\bex}{\begin{ex}}
+\newcommand{\eex}{\end{ex}}
+\newcommand{\bde}{\begin{description}}
+\newcommand{\ede}{\end{description}}
+\newcommand{\bcen}{\begin{center}}
+\newcommand{\ecen}{\end{center}}
+\newcommand{\bq}{\begin{quest}}
+\newcommand{\eq}{\end{quest}}
+
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
+
+\begin{document}
+
+\onehalfspacing
+
+\title[]{Cryptography Handout 06}
+\subtitle{Binary and One-Time Pads}
+\maketitle
+
+\section{Binary} Convert the following numbers to binary:
+\begin{enumerate}[1.]
+	\item 58 =\\
+	\item 47 = \\ 
+	\item 30 = \\  
+	\item 31 = \\  
+\end{enumerate}
+
+\noindent \emph{Question: What do you notice about the right-most bit for even versus odd numbers?}\\ 
+\vspace{.5in}
+
+
+\section{Pseudo-Random Bit Generation}
+\subsection*{Linear Congruential Generator}
+\begin{enumerate}[1.]
+	\item Start with an initial seed $x_0$.
+	\item Generate a sequence of numbers $x_1, x_2, \cdots$ in which $x_n = a x_{n-1}+b \bmod m$ for parameters $a,b$ and $m$.
+\end{enumerate}
+
+\bex
+Suppose $x_0 = 2, a = 3, b = 7, m = 5$.  Generate $x_1, x_2, x_3, x_4, x_5$.\\ 
+\begin{align*}
+x_1 &= \\
+x_2 &= \\
+x_3 &= \\
+x_4 &= \\
+x_5 &= \\
+\end{align*}
+
+\noindent \emph{Question: What are potential problems with this method?}\\ 
+\vspace{.5in}
+\eex
+
+
+\subsection*{Blum-Blum-Shub (BBS) Pseudo-Random Bit Generator}
+\begin{enumerate}[1.]
+	\item Choose two large prime numbers $p$ and $q$ in which both primes are congruent to $3 \bmod 4$.  Multiply them together to get $n = pq$.
+	\item Choose a seed $x_0 \equiv x^2 \bmod n$ where $x$ is a number in which $\gcd(n,x) = 1$.
+	\item Generate a sequence of numbers $b_1, b_2, \cdots$ in which
+		\begin{enumerate}[a.]
+			\item $x_j \equiv x_{j-1}^2 \bmod n$
+			\item $b_j$ is the least significant bit or right-most bit of $x_j$
+		\end{enumerate}
+\end{enumerate}
+
+\bex
+(from T \& W 2.10) Suppose we choose $p = 24672462467892469787$ and $q = 396736894567834589803$.  Then $$n = 9788476140853110794168855217413715781961.$$
+
+One possible choice of $x$ is $x = 873245647888478349013$.
+
+The initial seed is $x_0 = 8845298710478780097089917746010122863172$.\\
+
+We can compute $x_1, x_2, \cdots$ to get:
+\begin{align*}
+x_1 &\equiv 7118894281131329522745962455498123822408\\
+x_2 & \equiv 3145174608888893164151380152060704518227\\
+x_3 & \equiv 4898007782307156233272233185574899430355\\
+x_4 & \equiv 3935457818935112922347093546189672310389\\
+x_5 & \equiv 675099511510097048901761303198740246040\\
+\end{align*}
+
+What are $b_1, b_2, b_3, b_4, b_5$?\\
+\begin{align*}
+b_1 &= \\
+b_2 &= \\
+b_3 &= \\
+b_4 &= \\
+b_5 &= \\
+\end{align*}
+\eex
+
+\section{One-Time Pads}
+\begin{enumerate}[1.]
+	\item Write your plaintext as a sequence of 0s and 1s (binary, or use ASCII, etc.).
+	\item The key is a random sequence of 0s and 1s of the same length as the message.  Once a key is used, it is discarded and not used again.
+	\item Encryption: Add the key to the message using XOR (exclusive or) or adding $\bmod 2$.
+	\item Decryption: Add the same key to the ciphertext to get the plaintext back.
+\end{enumerate}
+
+\bex
+\texttt{10110011+11111111=}
+\eex
+
+\subsection*{Variation}
+\begin{enumerate}[1.]
+	\item Write your plaintext message.
+	\item Count the number $n$ of letters you have in your plaintext.
+	\item The key is a random sequence of shifts between 0 and 25.  On SageMathCell, type \texttt{randint(0,25)}.  Make sure your key is as long as the message (so there are $n$ shifts).
+	\item Encryption: follow your sequence of shifts.
+	\item Decryption: subtract instead of adding your shifts.
+\end{enumerate}
+
+\noindent \emph{Question: How might you go about sending your key to a recipient of your message securely?}\\ 
+\vspace{1in}
+
+\newpage Now your goal today is to work individually on the following:
+\begin{enumerate}[1.]
+	\item Create a plaintext message (about 10 letters long) of length $n$.
+	\item Generate a sequence of $n$ shifts between 0 and 25.  This is your key.
+	\item Use your sequence of shifts to encrypt your message.
+	\item Find a way to deliver your encrypted message to your intended recipient.  They will do the same and will try to give you a message.  Remember that your recipient must get a copy of your key as well as your ciphertext!  You are not allowed to just hand them your plaintext.
+	\item Decrypt the message that you are given.
+\end{enumerate}
+
+\begin{center}
+Alternatively...
+\end{center}
+
+\noindent If you don't want to go through all that work, you can intercept someone else's message, and if you decrypt it before the intended recipient, you win.
+
+\subsection*{Discussion}
+\begin{itemize}
+	\item Which issues did you come across when you were trying to deliver your message?\\
+	\item How might this generalize to issues in the `real world?'\\
+	\item Do you have any ideas on modifying the one-time pad to make the delivery of the key more secure?\\
+\end{itemize}
+
+
+\end{document}
