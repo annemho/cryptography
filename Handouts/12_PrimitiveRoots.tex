@@ -1,0 +1,129 @@
+\documentclass[12pt]{amsart}
+\pagestyle{plain}
+
+\usepackage{amsthm, setspace, framed, url, hyperref, lscape}
+\usepackage{enumerate}
+
+\usepackage[none]{hyphenat}
+\usepackage[pdftex]{graphicx}
+\usepackage{enumerate}
+\usepackage{tikz}
+\usepackage{courier}
+\makeatletter
+\def\@settitle{\begin{center}%
+  \baselineskip14\p@\relax
+  \bfseries
+  \uppercasenonmath\@title
+  \@title
+  \ifx\@subtitle\@empty\else
+     \\[1ex]\uppercasenonmath\@subtitle
+     \footnotesize\mdseries\@subtitle
+  \fi
+  \end{center}%
+}
+\def\subtitle#1{\gdef\@subtitle{#1}}
+\def\@subtitle{}
+\makeatother
+
+\setlength{\textwidth}{6.0in}
+\setlength{\textheight}{8.8in}
+\setlength{\oddsidemargin}{0.25in}
+\setlength{\evensidemargin}{0.25in}
+\setlength{\topmargin}{0in}
+
+\theoremstyle{plain}
+\newtheorem{thm}{Theorem}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem*{cor}{Corollary}
+\newtheorem{quest}{Question}
+\theoremstyle{definition}
+\newtheorem*{defn}{Definition}
+\newtheorem*{ex}{Example}
+\theoremstyle{remark}
+\newtheorem*{rem}{Remark}
+\newtheorem*{note}{Note}
+\newtheorem{case}{Case}
+
+\begin{document}
+
+\onehalfspacing
+
+\title[]{Cryptography Handout 12}
+\subtitle{Primitive Roots}
+\maketitle
+
+\begin{center}
+\emph{Based on \underline{Number Theory Through Inquiry} (Marshall, Odell, and Starbird)}.
+\end{center}
+
+\section{Review}
+
+\noindent\textbf{Fermat's Little Theorem.} Let $p$ be a prime number and let $a$ be an integer such that $\gcd(a,p) = 1$. Then $a^{p-1} \equiv 1 \mod p$.
+
+\noindent\textbf{Euler's Theorem.} Let $a$ and $n$ be integers with $n > 0$ such that $\gcd(a,n) = 1$. Then $a^{\varphi(n)} \equiv 1 \mod n$.
+
+\section{Primitive Roots}
+\begin{defn}
+Let $p$ be a prime.  An integer $g$ such that $\textup{ord}_p(g) = p-1$ is called a \emph{primitive root modulo} $p$.
+\end{defn}
+
+\begin{thm}
+Let $p$ be a prime and suppose $g$ is a primitive root modulo $p$.  Then the set $\{0,g,g^2,g^3, \cdots, g^{p-1}\}$ forms a complete residue system modulo $p$.
+\end{thm}
+
+\begin{quest}
+For each of the primes $p$ less than 20, find a primitive root and make a chart showing what powers of the primitive root gives each of the natural numbers less than $p$.  Note any observations.
+\end{quest}
+
+\newpage
+You might observe the following:
+\begin{thm}
+Every prime $p$ has a primitive root.
+\end{thm}
+
+This is another example of an existence theorem.
+
+\begin{quest}
+Consider the prime $p = 13$.  For each divisor $d = 1, 2, 3, 4, 6, 12$ of $12 = p-1$, mark which of the natural numbers in the set $\{1,2,3,4,5,6,7,8,9,10,11,12\}$ have order $d$.
+\end{quest}
+
+\newpage
+You might have observed that there are $\varphi(d)$ numbers of order $d$ for each $d$.  So in the case of 12, we have
+$$\varphi(1) + \varphi(2) + \varphi(3) + \varphi(4) + \varphi(6) + \varphi(12) = 12 = \sum_{d \mid 12} \varphi(d) = 12.$$
+
+In general, the more compact way of writing this is $$\sum_{d \mid n} \varphi(d)$$ which means the sum of the Euler-$\varphi$ function of the natural number divisors of the natural number $n$.  There is a more general relationship between the Euler-$\varphi$ function and divisors, which we'll explore next.
+
+\section{Euler-$\varphi$ and the sums of divisors}
+\begin{quest}
+Compute the following sums, and make any conjectures based on the patterns you notice.  (In particular, notice which numbers $n$ are primes, powers of primes, or products of primes).
+\begin{enumerate}[1.]
+	\item $\displaystyle \sum_{d \mid 6} \varphi(d)$\\ \vspace{1.5in}
+	\item $\displaystyle \sum_{d \mid 7} \varphi(d)$\\ \vspace{1.5in}
+	\newpage\item $\displaystyle \sum_{d \mid 24} \varphi(d)$\\ \vspace{2in}
+	\item $\displaystyle \sum_{d \mid 36} \varphi(d)$\\ \vspace{2in}
+	\item $\displaystyle \sum_{d \mid 27} \varphi(d)$\\ \vspace{2in}
+\end{enumerate}
+\end{quest}
+
+\newpage It turns out that we have a series of theorems based on these:
+\begin{lem}
+If $p$ is a prime, then $\displaystyle \sum_{d \mid p} \varphi(d) = p$.
+\end{lem}
+\begin{lem}
+If $p$ is a prime, then $\displaystyle \sum_{d \mid {p^k}} \varphi(d) = p^k$.
+\end{lem}
+\begin{lem}
+If $p$ and $q$ are two different primes, then $\displaystyle \sum_{d \mid pq} \varphi(d) = pq$.
+\end{lem}
+\begin{thm}
+If $n$ is a natural number, then $\displaystyle \sum_{d \mid n} \varphi(d) = n$.
+\end{thm}
+Using the previous theorem, we can prove the following statement:
+\begin{thm}
+Every prime $p$ has $\varphi(p-1)$ primitive roots.
+\end{thm}
+
+\begin{ex}
+\end{ex}
+
+\end{document}

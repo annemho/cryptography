@@ -1,0 +1,151 @@
+\documentclass[12pt]{amsart}
+\pagestyle{plain}
+
+\usepackage{amsthm, setspace, framed, url, hyperref, lscape}
+\usepackage{enumerate}
+
+\usepackage[none]{hyphenat}
+\usepackage[pdftex]{graphicx}
+\usepackage{enumerate}
+\usepackage{tikz}
+\usepackage{courier}
+\makeatletter
+\def\@settitle{\begin{center}%
+  \baselineskip14\p@\relax
+  \bfseries
+  \uppercasenonmath\@title
+  \@title
+  \ifx\@subtitle\@empty\else
+     \\[1ex]\uppercasenonmath\@subtitle
+     \footnotesize\mdseries\@subtitle
+  \fi
+  \end{center}%
+}
+\def\subtitle#1{\gdef\@subtitle{#1}}
+\def\@subtitle{}
+\makeatother
+
+\setlength{\textwidth}{6.0in}
+\setlength{\textheight}{8.8in}
+\setlength{\oddsidemargin}{0.25in}
+\setlength{\evensidemargin}{0.25in}
+\setlength{\topmargin}{0in}
+
+\theoremstyle{plain}
+\newtheorem{thm}{Theorem}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem*{cor}{Corollary}
+\newtheorem{quest}{Question}
+\theoremstyle{definition}
+\newtheorem*{defn}{Definition}
+\newtheorem*{ex}{Example}
+\theoremstyle{remark}
+\newtheorem*{rem}{Remark}
+\newtheorem*{note}{Note}
+\newtheorem{case}{Case}
+
+\begin{document}
+
+\onehalfspacing
+
+\title[]{Cryptography Handout 11}
+\subtitle{Fermat's Little Theorem and Euler's Theorem}
+\maketitle
+
+\begin{center}
+\emph{Based on \underline{Number Theory Through Inquiry} (Marshall, Odell, and Starbird)}.
+\end{center}
+
+\section{Fermat's Little Theorem and Euler's Theorem}
+\begin{quest} \label{Q1}
+Choose some relatively prime natural numbers $a$ and $n$ and compute the order of a modulo $n$.  Frame a conjecture concerning how large the order of a modulo $n$ can be, depending on $n$.
+\end{quest}
+
+\newpage
+You might have noticed that until the power was congruent to $1$ modulo $n$, the values modulo $n$ never repeated.  This is summarized in the theorem:
+\begin{thm} \label{T1}
+Let $a$ and $n$ be natural numbers with $\gcd(a,n) = 1$ and let $k = \textup{ord}_n(a)$.  Then the numbers $a^1, a^2, a^3, \cdots, a^k$ are pairwise incongruent modulo $n$.
+\end{thm}
+
+Another way to look at this theorem is the following:
+\begin{thm} \label{T2}
+Let $a$ and $n$ be natural numbers with $\gcd(a,n) = 1$ and let $k = \textup{ord}_n(a)$.  For any natural number $m$, $a^m$ is congruent modulo $n$ to one of the numbers $a^1, a^2, a^3, \cdots, a^k$.
+\end{thm}
+
+\begin{quest} \label{Q2}
+Come up with an explicit example of Theorem \ref{T2}: \vspace{1.5in}
+\end{quest}
+
+An observation you might have made when doing Question \ref{Q1} is that, in the definition $a^k \equiv 1 \mod n$, the order $k$ of a natural number in is less than $n$:
+
+\begin{thm} \label{T3}
+Let $a$ and $n$ be natural numbers with $\gcd(a,n) = 1$.  Then $\textup{ord}_n(a) < n$.
+\end{thm}
+
+\begin{quest} \label{Q3}
+Compute $a^{p-1} \mod p$ for various numbers $a$ and primes $p$.  Write down any patterns or observations.
+\end{quest}
+
+\newpage
+\begin{thm} \label{T4}
+Let $p$ be a prime number and let $a$ be an integer such that $\gcd(a,p) = 1$.  Then $R = \{a,2a,3a, \cdots, pa\}$ is a complete residue system modulo $p$.  In other words, no two elements of $R$ are congruent modulo $p$.
+\end{thm}
+
+\begin{quest} \label{Q4}
+Double check Theorem \ref{T4} by explicitly writing out the elements of $R$ for the following two cases:
+\begin{enumerate}[1.]
+	\item $p = 3, a = 8$\\ \vspace{1in}
+	\item $p = 5, a = 12$\\ \vspace{1.5in}
+\end{enumerate}
+\end{quest}
+
+\begin{thm} \label{T5}
+Let $p$ be a prime number and let $a$ be an integer such that $\gcd(a,p) = 1$.  Then $a \cdot 2a \cdot 3a \cdots (p-1)a \equiv 1\cdot 2 \cdot 3 \cdots (p-1) \mod p$.
+\end{thm}
+\begin{quest} \label{Q4}
+Verify Theorem \ref{T5} with the examples:
+\begin{enumerate}[1.]
+	\item $p = 3, a = 8$\\ \vspace{1.5in}
+	\newpage \item $p = 5, a = 12$\\ \vspace{2in}
+\end{enumerate}
+\end{quest}
+
+
+Theorem \ref{T5} can be used to prove Fermat's Little Theorem:
+
+\noindent\textbf{Fermat's Little Theorem.} Let $p$ be a prime number and let $a$ be an integer such that $\gcd(a,p) = 1$. Then $a^{p-1} \equiv 1 \mod p$.
+
+\vspace{1in}
+
+Euler's Theorem can be seen as a generalization of Fermat's Little Theorem but for composite numbers.
+
+\begin{defn} For a natural number $n$, the Euler phi-function $\varphi(n)$ is equal to the number of natural numbers less than or equal to $n$ that are relatively prime to $n$.
+\end{defn}
+
+\vspace{1in}
+
+\noindent\textbf{Euler's Theorem.} Let $a$ and $n$ be integers with $n > 0$ such that $\gcd(a,n) = 1$. Then $a^{\varphi(n)} \equiv 1 \mod p$.
+
+\newpage
+\section{Three-Pass Protocol}
+Alice wants to send a secret message $K$ to Bob.
+
+\noindent \textbf{Idea.}
+\begin{enumerate}[1.]
+	\item Alice puts $K$ in a box and locks it.  She sends the locked box to Bob.
+	\item Bob puts his lock on the box and sends it back to Alice.
+	\item Alice takes her lock off and sends it to Bob.
+	\item Bob takes his lock off, opens the box, and finds $K$.
+\end{enumerate}
+
+\noindent \textbf{Math.}
+\begin{enumerate}[1.]
+	\setcounter{enumi}{-1}
+	\item Everyone agrees upon a large prime $p$.  Alice chooses a random number $a$ with $\gcd(a,p) = 1$, and Bob chooses a random number $b$ with $\gcd(b,p) = 1$.
+	\item Alice sends $K_1 \equiv K^a \mod p$ to Bob.
+	\item Bob sends $K_2 \equiv K_1^b \mod p$ to Alice.
+	\item Alice sends $K_3 \equiv {K_2^a}^{-1} \mod p$ to Bob.
+	\item Bob computes $K \equiv {K_3^b}^{-1} \mod p$ and gets the message $K$.
+\end{enumerate}
+
+\end{document}

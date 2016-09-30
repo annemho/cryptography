@@ -1,0 +1,188 @@
+\documentclass[12pt]{amsart}
+\pagestyle{plain}
+
+\usepackage{amsthm, setspace, framed, url, hyperref, lscape}
+\usepackage{enumerate}
+
+\usepackage[none]{hyphenat}
+\usepackage[pdftex]{graphicx}
+\usepackage{enumerate}
+\usepackage{tikz}
+\usepackage{courier}
+\makeatletter
+\def\@settitle{\begin{center}%
+  \baselineskip14\p@\relax
+  \bfseries
+  \uppercasenonmath\@title
+  \@title
+  \ifx\@subtitle\@empty\else
+     \\[1ex]\uppercasenonmath\@subtitle
+     \footnotesize\mdseries\@subtitle
+  \fi
+  \end{center}%
+}
+\def\subtitle#1{\gdef\@subtitle{#1}}
+\def\@subtitle{}
+\makeatother
+
+\setlength{\textwidth}{6.0in}
+\setlength{\textheight}{8.8in}
+\setlength{\oddsidemargin}{0.25in}
+\setlength{\evensidemargin}{0.25in}
+\setlength{\topmargin}{0in}
+
+\theoremstyle{plain}
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem*{cor}{Corollary}
+\newtheorem{quest}{Question}
+
+\theoremstyle{definition}
+\newtheorem*{defn}{Definition}
+\newtheorem*{ex}{Example}
+
+\theoremstyle{remark}
+\newtheorem*{rem}{Remark}
+\newtheorem*{note}{Note}
+\newtheorem{case}{Case}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\Rnn}{\R^{n\times n}} 
+\newcommand{\Rn}{\R^{n}} 
+
+\newcommand{\bx}{{\bf x}}
+\newcommand{\bv}{{\bf v}}
+\newcommand{\bw}{{\bf w}}
+\newcommand{\bu}{{\bf u}}
+
+\newcommand{\bit}{\begin{itemize}}
+\newcommand{\eit}{\end{itemize}}
+\newcommand{\ben}{\begin{enumerate}}
+\newcommand{\een}{\end{enumerate}}
+\newcommand{\bea}{\begin{eqnarray*}}
+\newcommand{\eea}{\end{eqnarray*}}
+\newcommand{\bpf}{\begin{proof}}
+\newcommand{\epf}{\end{proof}\ms}
+\newcommand{\bthm}{\begin{thm}}
+\newcommand{\ethm}{\end{thm}}
+\newcommand{\bdefn}{\begin{defn}}
+\newcommand{\edefn}{\end{defn}}
+\newcommand{\bex}{\begin{ex}}
+\newcommand{\eex}{\end{ex}}
+\newcommand{\bde}{\begin{description}}
+\newcommand{\ede}{\end{description}}
+\newcommand{\bcen}{\begin{center}}
+\newcommand{\ecen}{\end{center}}
+\newcommand{\bq}{\begin{quest}}
+\newcommand{\eq}{\end{quest}}
+
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
+
+\begin{document}
+
+\onehalfspacing
+
+\title[]{Cryptography Handout 09}
+\subtitle{Congruences}
+\maketitle
+
+\section{Properties of Congruences}
+\begin{thm}
+Let $a,b,c,n$ be integers with $n \neq 0$.
+\begin{enumerate}[1.]
+	\item $a \equiv 0 \bmod n$ if and only if $n \mid a$.
+	\item $a \equiv a \bmod n$.
+	\item $a \equiv b \bmod n$ if and only if $b \equiv a \bmod n$.
+	\item If $a \equiv b$ and $b \equiv c \bmod n$, then $a \equiv c \bmod n$.
+\end{enumerate}
+\end{thm}
+
+\noindent Write the proof for property 3, keeping in mind you must show the if and only if statement:
+\vspace{2.5in}
+
+\begin{thm}
+Let $a,b,c,d,n$ be integers with $n \neq 0$, and suppose $a \equiv b \bmod n$ and $c \equiv d \bmod n$.  Then:
+\begin{itemize}
+	\item $a + c \equiv b + d (\bmod n)$,
+	\item $a - c \equiv b - d (\bmod n)$, and
+	\item $ac \equiv bd (\bmod n)$.
+\end{itemize}
+\end{thm}
+
+\begin{note}
+This basically tells us that we have addition, subtraction, and multiplication operations which behave the way we expect.
+\end{note}
+
+\newpage \bex
+Addition and Multiplication with $\mathbb{Z}_5$:\\
+\begin{center}
+\begin{tabular}{c|p{.3in}p{.3in}p{.3in}p{.3in}p{.3in}}
++ & 0 & 1 & 2 & 3 & 4\\ \hline
+0 & & & & &\vspace{.2in}\\ 
+1 & & & & &\vspace{.2in}\\
+2 & & & & &\vspace{.2in}\\
+3 & & & & &\vspace{.2in}\\
+4 & & & & &\vspace{.2in}\\
+\end{tabular}
+\begin{tabular}{c|p{.3in}p{.3in}p{.3in}p{.3in}p{.3in}}
+$\times$ & 0 & 1 & 2 & 3 & 4\\ \hline
+0 & & & & &\vspace{.2in}\\ 
+1 & & & & &\vspace{.2in}\\
+2 & & & & &\vspace{.2in}\\
+3 & & & & &\vspace{.2in}\\
+4 & & & & &\vspace{.2in}\\
+\end{tabular}
+\end{center}
+\eex
+
+\bex
+Addition and Multiplication with $\mathbb{Z}_4$:\\
+\begin{center}
+\begin{tabular}{c|p{.3in}p{.3in}p{.3in}p{.3in}}
++ & 0 & 1 & 2 & 3 \\ \hline
+0 & & & &\vspace{.2in}\\ 
+1 & & & &\vspace{.2in}\\
+2 & & & &\vspace{.2in}\\
+3 & & & &\vspace{.2in}\\
+\end{tabular}
+\begin{tabular}{c|p{.3in}p{.3in}p{.3in}p{.3in}}
+$\times$ & 0 & 1 & 2 & 3 \\ \hline
+0 & & & &\vspace{.2in}\\ 
+1 & & & &\vspace{.2in}\\
+2 & & & &\vspace{.2in}\\
+3 & & & &\vspace{.2in}\\
+\end{tabular}
+\end{center}
+\eex
+
+\noindent \textbf{Question:} Do you notice any patterns or differences between  $\mathbb{Z}_5$ and  $\mathbb{Z}_4$?\\
+\vspace{2in}
+
+\newpage \section{Division and Inverses}
+
+\noindent \textbf{Recall:} This was a problem from Mission 2: the ciphertext \texttt{GEZXDS} was encrypted by a Hill cipher with a $2 \times 2$ matrix.  The plaintext is \texttt{solved}.  Find the encryption matrix $M$.
+	
+	Problems:
+	\vspace{4in}
+	
+\noindent \textbf{Question:} How do we know when we have a multiplicative inverse or not?  (We'll figure it out.)
+
+	\begin{enumerate}[1.]
+	\item Go back to your $\mathbb{Z}_5$ and $\mathbb{Z}_4$ multiplication tables.  Which elements have inverses?
+	\vspace{1.5in}	
+	
+	\newpage \item Compute the $\gcd$ of all of these elements with inverses with $n$ in $\mathbb{Z}_n$.\\ \vspace{2in}
+	
+	\item Form a conjecture about which elements have inverses.  If you're not sure, write out the multiplication tables for $\mathbb{Z}_6$ and $\mathbb{Z}_7$ too, and do the same steps as above.\\ \vspace{2.5in}
+	
+	\item Given what you have conjectured, which elements should have inverses in $\mathbb{Z}_{20}$?  Which elements do not have inverses?
+\end{enumerate}
+
+
+
+\end{document}
