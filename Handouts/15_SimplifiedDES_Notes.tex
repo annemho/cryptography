@@ -1,0 +1,261 @@
+\documentclass[12pt]{amsart}
+\pagestyle{plain}
+
+\usepackage{amsthm, setspace, framed, url, hyperref, lscape}
+\usepackage{enumerate}
+\usepackage{blkarray}
+
+\usepackage[none]{hyphenat}
+\usepackage[pdftex]{graphicx}
+\usepackage{enumerate}
+\usepackage{tikz}
+\usepackage{courier}
+\makeatletter
+\def\@settitle{\begin{center}%
+  \baselineskip14\p@\relax
+  \bfseries
+  \uppercasenonmath\@title
+  \@title
+  \ifx\@subtitle\@empty\else
+     \\[1ex]\uppercasenonmath\@subtitle
+     \footnotesize\mdseries\@subtitle
+  \fi
+  \end{center}%
+}
+\def\subtitle#1{\gdef\@subtitle{#1}}
+\def\@subtitle{}
+\makeatother
+
+\setlength{\textwidth}{6.0in}
+\setlength{\textheight}{8.8in}
+\setlength{\oddsidemargin}{0.25in}
+\setlength{\evensidemargin}{0.25in}
+\setlength{\topmargin}{0in}
+
+\theoremstyle{plain}
+\newtheorem{thm}{Theorem}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem*{cor}{Corollary}
+\newtheorem{quest}{Question}
+\theoremstyle{definition}
+\newtheorem*{defn}{Definition}
+\newtheorem*{ex}{Example}
+\theoremstyle{remark}
+\newtheorem*{rem}{Remark}
+\newtheorem*{note}{Note}
+\newtheorem{case}{Case}
+
+\begin{document}
+
+\onehalfspacing
+
+\title[]{Cryptography: Simplified DES}
+\maketitle
+
+\begin{center}
+\emph{Based on \underline{Intro to Cryptography} (Trappe and Washington)}.
+\end{center}
+
+\section{Facilitator Notes}
+\begin{enumerate}[1.]
+	\item Split students into 10 groups and send them to the 10 ``Machines" for encryption.  Give them a blank ENCRYPTION handouts sheet, so that they can fill out details as they go.  Explain that every Machine is part of the whole system, whose goal is to encrypt a message (e.g. it takes \texttt{INPUT} and produces \texttt{OUTPUT} once you run through every machine).
+	\item Give them about 5 minutes at each Machine to work through a series of examples.  I printed various inputs on different colors of paper for each round, so that no one gets confused on which input corresponds to which output (print 10 sets of inputs to do this 10 times).  [Note: I have simplified the key $K$ in the machines from the $K_i$ from the text.]
+	\item After 5 minutes, have groups rotate through each Machine, so that they can understand how each one works.
+	\item Ask students to describe and discuss decryption in their groups and as a class.  [Start with the 12-bit string $LR$ and switch to get $RL$.  Use the key $K_i$ in reverse (if following the textbook), and decryption is basically the same as encryption.]
+	\item Discuss (next day) how the DES generalizes this.
+\end{enumerate}
+
+\begin{note}
+Additional things to do ahead of time:
+\begin{itemize}
+	\item Make sure each Machine has a large and clear sign, so that groups can find each other easily.
+	\item Make sure you get and bring in two pairs of scissors for SAW and SCISSORS.
+\end{itemize}
+\end{note}
+
+\newpage \section{Machines}
+The following pages are intended to be left at each Machine station as instructions.  Sample \texttt{INPUT: 011100100110} should produce \texttt{OUTPUT: 100110011000} (this is the example in the textbook).
+
+Other \texttt{INPUT} examples I will give my students include (10 examples total, so 10 colors of paper needed):
+\begin{enumerate}[1.]
+	\item \texttt{101010101010}
+	\item \texttt{100100100100}
+	\item \texttt{010101010101}
+	\item \texttt{010010010010}
+	\item \texttt{000000000000}
+	\item \texttt{111111111111}
+	\item \texttt{110011101001}
+	\item \texttt{100011001011}
+	\item \texttt{001101010010}
+\end{enumerate}
+
+See separate document for pages which are ready for printing.
+
+\newpage
+\section*{Saw}
+\textbf{Input(s):}  This is the first Machine in the system, and you have the \texttt{INPUT} for the whole system, which is a 12-bit string.\\
+
+\textbf{Output(s):} Two 6-bit strings $L$ and $R$ (one copy of $L$ and two copies of $R$).\\
+
+\textbf{Instructions:}
+\begin{enumerate}[1.]
+	\item Split \texttt{INPUT} in half into the left half $L$ and the right half $R$.  Make sure they are clearly labeled as such.
+	\item Give a copy of $R$ to COPIER and another copy to EXPANDER.
+	\item Give $L$ to LIGHTSWITCH.
+\end{enumerate}
+
+\newpage
+\section*{Copier}
+\textbf{Input(s):}  6-bit string called $R$.\\
+
+\textbf{Output(s):} 6-bit string called $L_*$.\\
+
+\textbf{Instructions:}
+\begin{enumerate}[1.]
+	\item You should get a 6-bit string from SAW called $R$.	
+	\item Copy $R$ exactly as it is but relabel it clearly as $L_*$.
+	\item Give $L_*$ to SUPERGLUE.
+\end{enumerate}
+
+\newpage
+\section*{Expander}
+\textbf{Input(s):}  6-bit string called $R$.\\
+
+\textbf{Output(s):} 8-bit string called $E$ (for ``expansion").\\
+
+\textbf{Instructions:}
+\begin{enumerate}[1.]
+	\item You should get a 6-bit string from SAW called $R$.  We can label the bits as: $b_1b_2b_3b_4b_5b_6$.
+	\item Write out $E$ which uses the bits from $R$, but is $E = b_1b_2b_4b_3b_4b_3b_5b_6$.
+	\item Clearly label your output as $E$, and give it to KEY.
+\end{enumerate}
+
+\newpage
+\section*{Key}
+\textbf{Input(s):}  8-bit string called $E$.\\
+
+\textbf{Output(s):} 8-bit string called $E\oplus K$.\\
+
+\textbf{Instructions:}
+\begin{enumerate}[1.]
+	\item You are given that $K = \texttt{01100101}$.
+	\item You should receive an 8-bit string from EXPANDER called $E$.
+	\item Perform XOR (exclusive or) on $E$ and $K$ to yield $E\oplus K$.
+	\item Clearly label your output as $E\oplus K$, and give it to SCISSORS.
+\end{enumerate}
+
+\newpage
+\section*{Scissors}
+\textbf{Input(s):}  8-bit string called $E\oplus K$.\\
+
+\textbf{Output(s):} Two 4-bit strings called $I$ and $II$.\\
+
+\textbf{Instructions:}
+\begin{enumerate}[1.]
+	\item You should receive an 8-bit string called  $E\oplus K$ from KEY.
+	\item Split$E\oplus K$ in half into the left half $I$ and the right half $II$.  They are each 4-bits now.  Make sure they are clearly labeled as $I$ and $II$.
+	\item Give $I$ to MAP $I$, and give $II$ to MAP $II$.
+\end{enumerate}
+
+\newpage
+\section*{Map I}
+\textbf{Input(s):}  4-bit string called $I$.\\
+
+\textbf{Output(s):} 3-bit string called $I_*$.\\
+
+\textbf{Instructions:}
+\begin{enumerate}[1.]
+	\item You should receive a 4-bit string from SCISSORS called $I$.
+	\item The following matrix is  MAP I.
+	
+	The first row is labeled as position \texttt{0} and the second is labeled as position \texttt{1}.
+	
+	The columns are labeled positions \texttt{000,001,010,011,100,101,110,111}.
+	
+	\begin{center}\[
+	\begin{blockarray}{ccccccccc}
+	&&\texttt{000}&\texttt{001}&\texttt{010}&\texttt{011}&\texttt{100}&\texttt{101}&\texttt{110}&\texttt{111}\\
+	\begin{block}{c(cccccccc)}
+	&\texttt{0} & 101 & 010 & 001 & 110 & 011 & 100 & 111 & 000\\
+	&\texttt{1} &001 & 100 & 110 & 010 & 000 & 111 & 101 & 011\\
+	\end{block}
+	\end{blockarray}
+	\] \end{center}
+
+	\item The first bit in $I$ tells you which row you look at in the MAP.  Find the appropriate row.
+	\item The next three bits in $I$ tell you which column you look at in MAP.  Find the appropriate column.
+	\item Write down the 3-bit output in the appropriate row and column.
+	\item Label your output as $I_*$, and give it to WELD.
+\end{enumerate}
+
+\newpage
+\section*{Map II}
+\textbf{Input(s):}  4-bit string called $II$.\\
+
+\textbf{Output(s):} 3-bit string called $II_*$. \\
+
+\textbf{Instructions:}
+\begin{enumerate}[1.]
+	\item You should receive a 4-bit string from SCISSORS called $II$. 
+	\item The following matrix is  MAP II.
+	
+	The first row is labeled as position \texttt{0} and the second is labeled as position \texttt{1}.
+	
+	The columns are labeled positions \texttt{000,001,010,011,100,101,110,111}.
+	
+		\begin{center}\[
+	\begin{blockarray}{ccccccccc}
+	&&\texttt{000}&\texttt{001}&\texttt{010}&\texttt{011}&\texttt{100}&\texttt{101}&\texttt{110}&\texttt{111}\\
+	\begin{block}{c(cccccccc)}
+	&\texttt{0} &100 & 000 & 110 & 101 & 111 & 001 & 011 & 010\\
+	&\texttt{1} &101 & 011 & 000 & 111 & 110 & 010 & 001 & 100\\
+	\end{block}
+	\end{blockarray}
+	\] \end{center}
+
+	\item The first bit in $II$ tells you which row you look at in the MAP.  Find the appropriate row.
+	\item The next three bits in $II$ tell you which column you look at in MAP.  Find the appropriate column.
+	\item Write down the 3-bit output in the appropriate row and column.
+	\item Label your output as $II_*$, and give it to WELD.
+\end{enumerate}
+
+\newpage
+\section*{Weld}
+\textbf{Input(s):}  Two 3-bit strings $I_*$ and $II_*$.\\
+
+\textbf{Output(s):} One 6-bit string called $F$.\\
+
+\textbf{Instructions:}
+\begin{enumerate}[1.]
+	\item You should receive a 3-bit string $I_*$ from MAP I and a 3-bit string $II_*$ from MAP II.
+	\item Create a 6-bit string by putting the two 3-bit strings together in the following order: $F = I_* II_*$.
+	\item Clearly label your output as $F$, and give it to LIGHTSWITCH.
+\end{enumerate}
+
+\newpage
+\section*{Lightswitch}
+\textbf{Input(s):}  A 6-bit string called $L$, and a 6-bit string called $F$.\\
+
+\textbf{Output(s):} A 6-bit string called $R_*$.\\
+
+\textbf{Instructions:}
+\begin{enumerate}[1.]
+	\item You should get a 6-bit string from SAW called $L$, and a 6-bit string from WELD called $F$.
+	\item Perform XOR (exclusive or) on $L$ and $F$ to yield $L\oplus F = R_*$.
+	\item Clearly label your output as $R_*$, and give it to SUPERGLUE.
+\end{enumerate}
+
+\newpage
+\section*{Superglue}
+\textbf{Input(s):}  A 6-bit string called $L_*$ and a 6-bit string called $R_*$.\\
+
+\textbf{Output(s):} This is the last Machine in the whole system, and you have the final \texttt{OUTPUT}, which is a 12-bit string.\\
+
+\textbf{Instructions:}
+\begin{enumerate}[1.]
+	\item You should get a 6-bit string from COPIER called $L_*$ and a 6-bit string from LIGHTSWITCH called $R_*$.
+	\item Create a 12-bit string by putting the two 6-bit strings together in the following order: $L_*R_* = \texttt{OUTPUT}$.
+\end{enumerate}
+
+
+\end{document}
