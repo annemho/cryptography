@@ -1,0 +1,172 @@
+\documentclass[12pt]{amsart}
+\pagestyle{plain}
+
+\usepackage{amsthm, setspace, framed, url, hyperref, lscape}
+\usepackage{enumerate}
+
+\usepackage[none]{hyphenat}
+\usepackage[pdftex]{graphicx}
+\usepackage{enumerate}
+\usepackage{tikz}
+\usepackage{courier}
+\makeatletter
+\def\@settitle{\begin{center}%
+  \baselineskip14\p@\relax
+  \bfseries
+  \uppercasenonmath\@title
+  \@title
+  \ifx\@subtitle\@empty\else
+     \\[1ex]\uppercasenonmath\@subtitle
+     \footnotesize\mdseries\@subtitle
+  \fi
+  \end{center}%
+}
+\def\subtitle#1{\gdef\@subtitle{#1}}
+\def\@subtitle{}
+\makeatother
+
+\setlength{\textwidth}{6.0in}
+\setlength{\textheight}{8.8in}
+\setlength{\oddsidemargin}{0.25in}
+\setlength{\evensidemargin}{0.25in}
+\setlength{\topmargin}{0in}
+
+\theoremstyle{plain}
+\newtheorem{thm}{Theorem}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem*{cor}{Corollary}
+\newtheorem{quest}{Question}
+\theoremstyle{definition}
+\newtheorem*{defn}{Definition}
+\newtheorem*{ex}{Example}
+\theoremstyle{remark}
+\newtheorem*{rem}{Remark}
+\newtheorem*{note}{Note}
+\newtheorem{case}{Case}
+
+\begin{document}
+
+\onehalfspacing
+
+\title[]{Cryptography Handout 13}
+\subtitle{Square Roots and Squares}
+\maketitle
+
+\begin{center}
+\emph{Based on \underline{Number Theory Through Inquiry} (Marshall, Odell, and Starbird)}.
+\end{center}
+
+\begin{quest} 
+Determine which of the numbers $1, 2, 3, \cdots, 12$ are perfect squares modulo 13.  For each such square, list the number or numbers in the set whose square is that number (i.e. its square roots).\\
+\begin{center}
+\begin{tabular}{|c|p{1.5in}|p{2.5in}|} \hline
+Number & Square $\bmod 13$? & Square Root(s)?\\ \hline
+1&Yes&$12^2 \bmod 13 \equiv 1 \bmod 13$\\ [.2in]
+2&&\\ [.2in]
+3&&\\ [.2in]
+4&&\\ [.2in]
+5&&\\ [.2in]
+6&&\\ [.2in]
+7&&\\ [.2in]
+8&&\\ [.2in]
+9&&\\ [.2in]
+10&&\\ [.2in]
+11&&\\ [.2in]
+12&&\\  [.2in]\hline
+\end{tabular}
+\end{center}
+
+How many numbers (out of the 12) show up as squares $\bmod 13$?
+\end{quest}
+
+\newpage
+\begin{defn} If $a$ is an integer, $p$ is a prime, and $a \equiv b^2 \mod p$ for some integer $b$, then $a$ is called a \textbf{quadratic residue modulo $p$}.  If $a$ is not congruent to any square modulo $p$, then $a$ is a \textbf{quadratic non-residue modulo $p$}.
+\end{defn}
+
+\begin{thm}
+Let $p$ be a prime.  Half the numbers not congruent to $0 \bmod p$ in a complete residue system $\bmod p$ are quadratic residues and half are quadratic non-residues.
+\end{thm}
+
+\begin{defn} For an odd prime $p$ and a natural number $a$ with $p$ not dividing $a$, the \textbf{Legendre symbol $\left( \frac{a}{p}\right)$} is defined to be:
+\[ \left( \frac{a}{p}\right) = \begin{cases} 
+      1 & a \text{ is a quadratic residue } \bmod p \\
+      -1 & a \text{ is a quadratic non-residue } \bmod p \\
+   \end{cases}
+\]
+\end{defn}
+
+\begin{thm}
+Suppose $p$ is an odd prime and $p$ does not divide the numbers $a$ or $b$.  Then $$\left( \frac{ab}{p}\right) = \left( \frac{a}{p}\right)\left( \frac{b}{p}\right).$$
+\end{thm}
+
+Rewrite the above theorem in your own words, so you remember what it means:\\ \vspace{1in}
+
+\noindent \textbf{Euler's Criterion (Theorem).}
+Suppose $p$ is an odd prime and $p$ does not divide the natural number $a$.  Then $a$ is a quadratic residue $\bmod p$ if and only if $a^{(p-1)/2} \equiv 1 \bmod p$, and $a$ is a quadratic non-residue $\bmod p$ if and only if $a^{(p-1)/2} \equiv -1 \bmod p$.
+
+\newpage \begin{quest} 
+Fill out the following table for $p = 7$.
+\begin{center}
+\begin{tabular}{|c|p{2in}|p{2in}|} \hline
+$a$ & $a^{(p-1/2)} \equiv a^3 \bmod 73$? & $a^2 \bmod 7$\\ \hline
+1&1&1\\ [.2in]
+2&&\\ [.2in]
+3&&\\ [.2in]
+4&&\\ [.2in]
+5&&\\ [.2in]
+6&&\\ [.2in]
+12&&\\  [.2in]\hline
+\end{tabular}
+\end{center}
+You should notice that you only have $1$ and $-1 \bmod p$ in the second column.
+\end{quest}
+
+\begin{note}
+$1$ is always a quadratic residue.  You might wonder about other numbers too.  Let's start by looking at $-1$:
+\end{note}
+
+\begin{thm}
+Let $p$ be an odd prime.  Then $-1$ is a quadratic residue $\bmod p$ if and only if
+\[ \left( \frac{-1}{p}\right) = \begin{cases} 
+      1 & p \equiv 1 \bmod 4 \\
+      -1 & p \equiv 3 \bmod 4 \\
+   \end{cases}
+\]
+\end{thm}
+
+\begin{thm}
+Let $p$ be an odd prime.  Then
+\[ \left( \frac{2}{p}\right) = \begin{cases} 
+      1 & p \equiv 1 \text{ or } 7 \bmod 8\\
+      -1 & p \equiv 3  \text{ or }  5 \bmod 8\\
+   \end{cases}
+\]
+\end{thm}
+
+Rather than looking at $ \left( \frac{3}{p}\right),  \left( \frac{4}{p}\right), \cdots$, we'll consider $\left( \frac{p}{q}\right)$ for primes $p$ and $q$.
+
+\newpage \begin{quest} 
+Fill out the following table assuming that the columns are $p$ and the rows are $q$ (ignore the boxes with $x$).  You should only have $1$ and $-1$.
+\begin{center}
+\begin{tabular}{|p{.4in}||p{.4in}|p{.4in}|p{.4in}|p{.4in}|p{.4in}|p{.4in}|p{.4in}|p{.4in}|p{.4in}|p{.4in}|} \hline
+&3&5&7&11&13&17&19&23&29&31\\ \hline\hline
+3 &x&&&&&&&&&\\[.2in] \hline
+5 &&x&&&&&&&&\\[.2in] \hline
+7 &&&x&&&&&&&\\[.2in] \hline
+11 &&&&x&&&&&&\\[.2in] \hline
+13 &&&&&x&&&&&\\[.2in] \hline
+17 &&&&&&x&&&&\\[.2in] \hline
+19 &&&&&&&x&&&\\[.2in] \hline
+23 &&&&&&&&x&&\\[.2in] \hline
+29 &&&&&&&&&x&\\[.2in] \hline
+31 &&&&&&&&&&x\\[.2in] \hline
+\end{tabular}
+\end{center}
+\end{quest}
+
+\begin{quest} 
+Using the table you made, make a conjecture about the relationship between $\left( \frac{p}{q}\right)$ and $\left( \frac{q}{p}\right)$.\\ \vspace{1in}
+\end{quest}
+
+
+\end{document}

@@ -1,0 +1,165 @@
+\documentclass[12pt]{amsart}
+\pagestyle{plain}
+
+\usepackage{amsthm, setspace, framed, url, hyperref, lscape}
+\usepackage{enumerate}
+
+\usepackage[none]{hyphenat}
+\usepackage[pdftex]{graphicx}
+\usepackage{enumerate}
+\usepackage{tikz}
+\usepackage{courier}
+\makeatletter
+\def\@settitle{\begin{center}%
+  \baselineskip14\p@\relax
+  \bfseries
+  \uppercasenonmath\@title
+  \@title
+  \ifx\@subtitle\@empty\else
+     \\[1ex]\uppercasenonmath\@subtitle
+     \footnotesize\mdseries\@subtitle
+  \fi
+  \end{center}%
+}
+\def\subtitle#1{\gdef\@subtitle{#1}}
+\def\@subtitle{}
+\makeatother
+
+\setlength{\textwidth}{6.0in}
+\setlength{\textheight}{8.8in}
+\setlength{\oddsidemargin}{0.25in}
+\setlength{\evensidemargin}{0.25in}
+\setlength{\topmargin}{0in}
+
+\theoremstyle{plain}
+\newtheorem{thm}{Theorem}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem*{cor}{Corollary}
+\newtheorem{quest}{Question}
+\theoremstyle{definition}
+\newtheorem*{defn}{Definition}
+\newtheorem*{ex}{Example}
+\theoremstyle{remark}
+\newtheorem*{rem}{Remark}
+\newtheorem*{note}{Note}
+\newtheorem{case}{Case}
+
+\begin{document}
+
+\onehalfspacing
+
+\title[]{Cryptography Handout 14}
+\subtitle{Summary: Key Number Theory Definitions and Results}
+\maketitle
+
+\section{Divisibility and Congruences}
+\begin{defn}
+Let $a$ and $b$ be integers with $a \neq 0$.  We say \textbf{$a$ divides $b$} if there is an integer $k$ such that $b = ak$.  This is denoted $a \mid b$.
+\end{defn}
+
+\begin{defn}
+Suppose $a,b,n$ are integers with $n > 0$.  We say \textbf{$a$ and $b$ are congruent modulo $n$} if and only if $n \mid (a-b)$ or $a \equiv b \mod n$.  Alternatively, we can think of $a-b$ as a multiple of $n$, or $a-b = kn$ for some integer $k$.
+\end{defn}
+
+\begin{defn}
+The \textbf{greatest common divisor} of $a$ and $b$ is the largest positive integer dividing both $a$ and $b$.  This is denoted $\gcd(a,b)$.
+\end{defn}
+
+\noindent\textbf{Euclidean Algorithm.}  Suppose $a$ and $b$ are integers and $a > b$.
+\begin{enumerate}[1.]
+	\item Divide $a$ by $b$ to get $$a = q_1b + r_1$$ where $q_1$ is the quotient and $r_1$ is the remainder.
+	\item If $r_1 = 0$, then $b \mid a$ and $\gcd(a,b) = b$.  If $r_1 \neq 0$, then divide $b$ by $r_1$ to get $$b = q_2r_1+r_2.$$
+	\item Continue in this way until the remainder is 0.
+	\begin{align*}
+	a &= q_1 b + r_1\\
+	b &= q_2 r_1 + r_2\\
+	r_1 &= q_3 r_2 + r_3\\
+	&\vdots\\
+	r_{k-1} &= q_{k+1}r_k
+	\end{align*}
+	The conclusion is that $\gcd(a,b) = r_k$.
+\end{enumerate}
+
+\begin{thm}
+Let $a$ and $b$ be integers not both 0.  There exist integers $x$ and $y$ such that $ax+by = \gcd(a,b)$.
+\end{thm}
+
+\begin{cor}
+If $p$ is a prime and $p \mid ab$, then either $p \mid a$ or $p \mid b$.
+\end{cor}
+
+
+\begin{thm}
+Let $a$ and $n$ be integers with $n > 0$.  If $gcd(a,n) = 1$, then $a^{-1}$ exists modulo $n$.
+\end{thm}
+
+\section{Chinese Remainder Theorem}
+\begin{defn}
+Let $a$ and $n$ be integers.  If $\gcd(a,n) = 1$, then we say $a$ and $n$ are \textbf{relatively prime}.
+\end{defn}
+
+\noindent\textbf{Chinese Remainder Theorem.} Suppose $\gcd(m,n) = 1$ for two integers $m$ and $n$.  Given integers $a$ and $b$, there exists exactly one solution $x \mod mn$ to the simultaneous congruences:
+\begin{align*}
+x &\equiv a \mod m\\
+x &\equiv b \mod n.\\
+\end{align*}
+
+\section{Fermat's Little Theorem and Euler's Theorem}
+\begin{defn}
+Let $a$ and $n$ be integers where $n > 0$.  The smallest natural number $k$ such that $$a^k \equiv 1 \mod n$$ is the \textbf{order of a modulo $n$} and is denoted $k = \textup{ord}_n(a)$.
+\end{defn}
+
+\noindent\textbf{Fermat's Little Theorem.} Let $p$ be a prime number and let $a$ be an integer such that $\gcd(a,p) = 1$. Then $a^{p-1} \equiv 1 \mod p$.
+
+
+\begin{defn} For a natural number $n$, the Euler phi-function $\varphi(n)$ is equal to the number of natural numbers less than or equal to $n$ that are relatively prime to $n$.
+\end{defn}
+
+\noindent\textbf{Euler's Theorem.} Let $a$ and $n$ be integers with $n > 0$ such that $\gcd(a,n) = 1$. Then $a^{\varphi(n)} \equiv 1 \mod p$.
+
+\section{Primitive Roots}
+\begin{defn} Let $p$ be a prime.  An integer $g$ such that $\textup{ord}_p(g) = p-1$ is a \textbf{primitive root modulo $p$}.
+\end{defn}
+
+\begin{thm}
+Every prime $p$ has a primitive root.
+\end{thm}
+
+\begin{thm}
+Every prime $p$ has $\varphi(p-1)$ primitive roots.
+\end{thm}
+
+\section{Square Roots and Squares}
+
+\begin{defn} If $a$ is an integer, $p$ is a prime, and $a \equiv b^2 \mod p$ for some integer $b$, then $a$ is called a \textbf{quadratic residue modulo $p$}.  If $a$ is not congruent to any square modulo $p$, then $a$ is a \textbf{quadratic non-residue modulo $p$}.
+\end{defn}
+
+\begin{thm}
+Let $p$ be a prime.  Half the numbers not congruent to $0 \bmod p$ in a complete residue system $\bmod p$ are quadratic residues and half are quadratic non-residues.
+\end{thm}
+
+\begin{defn} For an odd prime $p$ and a natural number $a$ with $p$ not dividing $a$, the \textbf{Legendre symbol $\left( \frac{a}{p}\right)$} is defined to be:
+\[ \left( \frac{a}{p}\right) = \begin{cases} 
+      1 & a \text{ is a quadratic residue } \bmod p \\
+      -1 & a \text{ is a quadratic non-residue } \bmod p \\
+   \end{cases}
+\]
+\end{defn}
+
+\begin{thm}
+Suppose $p$ is an odd prime and $p$ does not divide the numbers $a$ or $b$.  Then $$\left( \frac{ab}{p}\right) = \left( \frac{a}{p}\right)\left( \frac{b}{p}\right).$$
+\end{thm}
+
+\noindent \textbf{Euler's Criterion (Theorem).}
+Suppose $p$ is an odd prime and $p$ does not divide the natural number $a$.  Then $a$ is a quadratic residue $\bmod p$ if and only if $a^{(p-1)/2} \equiv 1 \bmod p$, and $a$ is a quadratic non-residue $\bmod p$ if and only if $a^{(p-1)/2} \equiv -1 \bmod p$.
+
+
+\noindent \textbf{Quadratic Reciprocity.}
+Let $p$ and $q$ be odd primes.  Then
+\[ \left( \frac{p}{q}\right) = \begin{cases} 
+      \left( \frac{q}{p}\right) & p \equiv 1 \bmod 4 \text{ or } q \equiv 1 \bmod 4\\
+      \left( -\frac{q}{p}\right) & p \equiv q \equiv 3 \bmod 4\\
+   \end{cases}
+\]
+
+\end{document}
