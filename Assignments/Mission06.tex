@@ -1,0 +1,126 @@
+\documentclass[12pt]{amsart}
+\pagestyle{plain}
+
+\usepackage{amsthm, setspace, framed, hyperref}
+\usepackage[pdftex]{graphicx}
+\usepackage{enumerate}
+\usepackage[none]{hyphenat}
+
+\usepackage[left=1in, right=1in, top=1in, bottom=1in]{geometry}
+\setlength\parindent{0pt}
+
+\theoremstyle{plain}
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem*{cor}{Corollary}
+\newtheorem{quest}{Question}
+\theoremstyle{definition}
+\newtheorem*{defn}{Definition}
+\newtheorem*{ex}{Example}
+
+\begin{document}
+\title[]{Cryptography Mission 06 Dossier}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}l l}
+MATH/CSCI 408  & Name: \rule{7cm}{0.5pt} \\
+\hline\hline
+\end{tabular*} \\
+\maketitle
+
+\begin{center}\textbf{Deadline: Thursday, 20 October 2016 at 3:05pm}\\
+
+This mission covers Sections 3.9, 3.10, and 4.2.
+\end{center}
+
+\begin{framed}
+Check one:\\
+
+\framebox(12,12){} I received help from the following classmate(s) on this assignment:\\
+
+\rule{15cm}{0.5pt}.\\
+
+\framebox(12,12){} I did not receive any help on this assignment.
+\end{framed}
+
+\section{Graded Problems}
+
+\begin{enumerate}[1.]
+	\item Given an integer $a$ and an odd prime $p$.  Determine if $x^2 \equiv a \mod p$ has a solution or not.  Justify.
+	\begin{enumerate}[a.]
+		\item $a = 4, p = 11$
+		\begin{framed}
+		\vspace{1in}
+		\end{framed}
+		\item $a = 2, p = 19$
+		\begin{framed}
+		\vspace{1in}
+		\end{framed}
+		\item $a = 3, p = 29$
+		\begin{framed}
+		\vspace{1in}
+		\end{framed}
+	\end{enumerate}
+	\item Given an integer $a$ (not congruent to 0 $\mod p$) and an odd prime $p$, recall that the Legendre symbol is defined as: 
+	\[ \left( \frac{a}{p}\right) = \begin{cases} 
+      1 & a \text{ is a quadratic residue } \bmod p \\
+      -1 & a \text{ is a quadratic non-residue } \bmod p \\
+   \end{cases}
+	\]
+	Evaluate the following:
+	\begin{enumerate}[a.]
+		\item $\left( \frac{7}{13} \right)$
+		\begin{framed}
+		\vspace{1.1in}
+		\end{framed}
+		\item $\left( \frac{7}{19} \right)$
+		\begin{framed}
+		\vspace{1.1in}
+		\end{framed}
+		\item $\left( \frac{2}{13} \right)$
+		\begin{framed}
+		\vspace{1.1in}
+		\end{framed}
+		\item $\left( \frac{14}{13} \right)$
+		\begin{framed}
+		\vspace{1.1in}
+		\end{framed}
+	\end{enumerate}
+	\item Recall that the Law of Quadratic Reciprocity says:  Let $p$ and $q$ be odd primes.  Then
+		\[ \left( \frac{p}{q}\right) = \begin{cases} 
+      		\left( \frac{q}{p}\right) & p \equiv 1 \bmod 4 \text{ or } q \equiv 1 \bmod 4\\
+      		\left( -\frac{q}{p}\right) & p \equiv q \equiv 3 \bmod 4\\
+  		 \end{cases}
+		\]
+		Compute the following.  Be sure to show all work.
+		\begin{enumerate}[a.]
+		\item  $\left(\frac{97}{101}\right)$
+		\begin{framed}
+		\vspace{1in}
+		\end{framed}
+		\item $\left(\frac{101}{97}\right)$
+		\begin{framed}
+		\vspace{1in}
+		\end{framed}
+		\item $\left(\frac{5}{103}\right)$
+		\begin{framed}
+		\vspace{1in}
+		\end{framed}
+		\item $\left(\frac{103}{5}\right)$
+		\begin{framed}
+		\vspace{1in}
+		\end{framed}
+		\item $\left(\frac{69}{389}\right)$
+		\begin{framed}
+		\vspace{1in}
+		\end{framed}
+		\end{enumerate}
+\end{enumerate}
+
+
+\section{Recommended Exercises}
+\noindent These will not be graded but are recommended if you need more practice.
+\begin{itemize}
+	\item Section 3.13: \# 29, 30, 31, 32
+	\item Section 3.14: \# 11, 12, 13
+\end{itemize}
+	
+\end{document}
