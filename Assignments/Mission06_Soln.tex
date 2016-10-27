@@ -1,0 +1,111 @@
+\documentclass[12pt]{amsart}
+\pagestyle{plain}
+
+\usepackage{amsthm, setspace, framed, hyperref}
+\usepackage[pdftex]{graphicx}
+\usepackage{enumerate}
+\usepackage[none]{hyphenat}
+
+\usepackage[left=1in, right=1in, top=1in, bottom=1in]{geometry}
+\setlength\parindent{0pt}
+
+\theoremstyle{plain}
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem*{cor}{Corollary}
+\newtheorem{quest}{Question}
+\theoremstyle{definition}
+\newtheorem*{defn}{Definition}
+\newtheorem*{ex}{Example}
+
+\begin{document}
+\title[]{Cryptography Mission 06 Solutions}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}l l}
+MATH/CSCI 408  & Name: \rule{7cm}{0.5pt} \\
+\hline\hline
+\end{tabular*} \\
+\maketitle
+
+\begin{center}\textbf{Deadline: Thursday, 20 October 2016 at 3:05pm}\\
+
+This mission covers Sections 3.9, 3.10, and 4.2.
+\end{center}
+
+\section{Graded Problems}
+
+\begin{enumerate}[1.]
+	\item Given an integer $a$ and an odd prime $p$.  Determine if $x^2 \equiv a \mod p$ has a solution or not.  Justify.
+	\begin{enumerate}[a.]
+		\item $a = 4, p = 11$
+		\begin{framed}
+		$4^{\frac{11-1}{2}} = 4^{5} \equiv 1 \mod 11$, so yes.
+		\end{framed}
+		\item $a = 2, p = 19$
+		\begin{framed}
+		$2^{\frac{19-1}{2}} = 2^{9} \equiv 18 \mod 19$, so no.
+		\end{framed}
+		\item $a = 3, p = 29$
+		\begin{framed}
+		$3^{\frac{29-1}{2}} = 3^{14} \equiv 28 \mod 29$, so no.
+		\end{framed}
+	\end{enumerate}
+	\item Given an integer $a$ (not congruent to 0 $\mod p$) and an odd prime $p$, recall that the Legendre symbol is defined as: 
+	\[ \left( \frac{a}{p}\right) = \begin{cases} 
+      1 & a \text{ is a quadratic residue } \bmod p \\
+      -1 & a \text{ is a quadratic non-residue } \bmod p \\
+   \end{cases}
+	\]
+	Evaluate the following:
+	\begin{enumerate}[a.]
+		\item $\left( \frac{7}{13} \right)$
+		\begin{framed}
+		We can compute this by hand or use SageMath.  The \texttt{kronecker} command is the same as the Legendre symbol.\\
+		\texttt{kronecker(7,13)} = -1
+		\end{framed}
+		\item $\left( \frac{7}{19} \right)$
+		\begin{framed}
+		\texttt{kronecker(7,19)} = 1
+		\end{framed}
+		\item $\left( \frac{2}{13} \right)$
+		\begin{framed}
+		\texttt{kronecker(2,13)} = -1
+		\end{framed}
+		\item $\left( \frac{14}{13} \right)$
+		\begin{framed}
+		We can use the property that the Legendre symbol is multiplicative to show that $\left( \frac{14}{13} \right) = \left( \frac{2}{13} \right)\left( \frac{7}{13} \right) = (-1)(-1) = 1$
+		\end{framed}
+	\end{enumerate}
+	\item Recall that the Law of Quadratic Reciprocity says:  Let $p$ and $q$ be odd primes.  Then
+		\[ \left( \frac{p}{q}\right) = \begin{cases} 
+      		\left( \frac{q}{p}\right) & p \equiv 1 \bmod 4 \text{ or } q \equiv 1 \bmod 4\\
+      		\left( -\frac{q}{p}\right) & p \equiv q \equiv 3 \bmod 4\\
+  		 \end{cases}
+		\]
+		Compute the following.  Be sure to show all work.
+		\begin{enumerate}[a.]
+		\item  $\left(\frac{97}{101}\right)$
+		\begin{framed}
+		\texttt{kronecker(97,101)} = 1
+		\end{framed}
+		\item $\left(\frac{101}{97}\right)$
+		\begin{framed}
+		Since $97 \equiv 1 \bmod 4$, then the answer is still 1.
+		\end{framed}
+		\item $\left(\frac{5}{103}\right)$
+		\begin{framed}
+		\texttt{kronecker(5,103)} = -1.
+		\end{framed}
+		\item $\left(\frac{103}{5}\right)$
+		\begin{framed}
+		Since $5 \equiv 1 \bmod 4$, then the answer is still -1.
+		\end{framed}
+		\item $\left(\frac{69}{389}\right)$
+		\begin{framed}
+		$$\left(\frac{69}{389}\right)= \left(\frac{3 \cdot 23}{389}\right) = \left(\frac{3}{389}\right)\left(\frac{23}{389}\right)$$
+		Note that $3, 23,$ and $389$ are all odd primes.  $3$ and $23$ are $\equiv 3 \mod 4$, but $389 \equiv 1 \mod 4$, so we have:
+		$$\left(\frac{3}{389}\right)\left(\frac{23}{389}\right) = (-1)(-1) = 1$$
+		\end{framed}
+		\end{enumerate}
+\end{enumerate}
+
+\end{document}
