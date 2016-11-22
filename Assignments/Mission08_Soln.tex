@@ -1,0 +1,68 @@
+\documentclass[12pt]{amsart}
+\pagestyle{plain}
+
+\usepackage{amsthm, setspace, framed, hyperref}
+\usepackage[pdftex]{graphicx}
+\usepackage{enumerate}
+\usepackage[none]{hyphenat}
+
+\usepackage[left=1in, right=1in, top=1in, bottom=1in]{geometry}
+\setlength\parindent{0pt}
+
+\theoremstyle{plain}
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem*{cor}{Corollary}
+\newtheorem{quest}{Question}
+\theoremstyle{definition}
+\newtheorem*{defn}{Definition}
+\newtheorem*{ex}{Example}
+
+\begin{document}
+\title[]{Cryptography Mission 08 Solutions}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}l l}
+MATH/CSCI 408  & Name: \rule{7cm}{0.5pt} \\
+\hline\hline
+\end{tabular*} \\
+\maketitle
+
+\begin{center}\textbf{Deadline: Thursday, 10 November 2016 at 3:05pm}\\
+
+This mission covers Sections 6.1 and 6.2.
+\end{center}
+
+\section{Graded Problems}
+
+\begin{enumerate}[1.]
+	\item Work through the RSA code (RSA.sagews) on Moodle.  
+	\begin{enumerate}[a.]
+		\item Notice that if you run the code multiple times, you will end up getting different encrypted text.  In a sentence or two, explain why this is:
+		\begin{framed}
+		Random numbers are generated as part of the algorithm.
+		\end{framed}
+		\item Encrypt a one-line phrase, and email the input and output to me (please don't write this one by hand!).
+	\end{enumerate}
+	 \item Part of the RSA lectures was a claim that we can factor $n = pq$ by just knowing $n$ and $\varphi(n)$ (see notes on using a certain polynomial and the quadratic formula).  Write out the details of how you would do this for $n = 27679$.  You can use SageMath for the Euler phi function, but you cannot use it for direct factoring here.
+		\begin{framed}
+		\begin{align*}
+		X^2-(n-\varphi(n)+1)X+n &\Rightarrow X^2-400X+27679\\
+		X &= \frac{400 \pm \sqrt{(-400)^2-4(1)(27679)}}{2}\\
+		&= 311, 89
+		\end{align*}
+		\end{framed}
+	\item Part of the discussion on RSA attacks was a mention of \textbf{continued fractions}.
+		\begin{enumerate}[a.]
+			\item Read the intro, motivation and notation, and basic formula sections on Wikipedia's continued fractions page: \url{https://en.wikipedia.org/wiki/Continued_fraction}.\\
+			\item Write an example of a finite continued fraction here.\\
+				\begin{framed}
+				$$\frac{26}{7} = 3+\frac{1}{1+\frac{1}{2+\frac{1}{2}}}$$
+				\end{framed}
+			\item Explain in a sentence which types of numbers would have an infinite continued fraction.
+				\begin{framed}
+				An irrational number would yield an infinite continued fraction.
+				\end{framed}
+		\end{enumerate}
+\end{enumerate}
+
+	
+\end{document}

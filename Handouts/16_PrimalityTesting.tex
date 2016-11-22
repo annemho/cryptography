@@ -1,0 +1,170 @@
+\documentclass[12pt]{amsart}
+\pagestyle{plain}
+
+\usepackage{amsthm, setspace, framed, url, hyperref, lscape}
+\usepackage{enumerate}
+\usepackage{listings}
+
+
+\usepackage[none]{hyphenat}
+\usepackage[pdftex]{graphicx}
+\usepackage{tikz}
+\usepackage{courier}
+\makeatletter
+\def\@settitle{\begin{center}%
+  \baselineskip14\p@\relax
+  \bfseries
+  \uppercasenonmath\@title
+  \@title
+  \ifx\@subtitle\@empty\else
+     \\[1ex]\uppercasenonmath\@subtitle
+     \footnotesize\mdseries\@subtitle
+  \fi
+  \end{center}%
+}
+\def\subtitle#1{\gdef\@subtitle{#1}}
+\def\@subtitle{}
+\makeatother
+
+\setlength{\textwidth}{6.0in}
+\setlength{\textheight}{8.8in}
+\setlength{\oddsidemargin}{0.25in}
+\setlength{\evensidemargin}{0.25in}
+\setlength{\topmargin}{0in}
+
+\theoremstyle{plain}
+\newtheorem{thm}{Theorem}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem*{cor}{Corollary}
+\newtheorem{quest}{Question}
+\theoremstyle{definition}
+\newtheorem*{defn}{Definition}
+\newtheorem*{ex}{Example}
+\theoremstyle{remark}
+\newtheorem*{rem}{Remark}
+\newtheorem*{note}{Note}
+\newtheorem{case}{Case}
+
+\begin{document}
+
+\onehalfspacing
+
+\title[]{Cryptography Handout 16}
+\subtitle{Primality Testing}
+\maketitle
+
+\section{First Explorations}
+Recall that a \textbf{prime number} $p$ is one in which the only factors are 1 and $p$.
+
+\begin{ex}
+$p = 7, 31, 73, 311$ are prime numbers.
+\end{ex}
+
+\begin{quest}
+Consider the following numbers: $292, 293, 299, 313, 427, 757, 759, 290829273$.\\
+Determine if they are prime or not.\\
+Discuss your strategies and any problems that arise with your group.
+\end{quest}
+
+
+\newpage \section{Factoring is not the same as Primality Testing}
+\noindent The following theorem is called the ``basic principle" in your text (6.3 p. 176).
+\begin{thm}
+Let $n$ be an integer and suppose there exist integers $x$ and $y$ with $$x^2 \equiv y^2 \bmod n,$$ but $x \not\equiv \pm y \bmod n$.  Then $n$ is composite.  Moreover, $\gcd(x-y,n)$ gives a nontrivial factor of $n$.
+\end{thm}
+
+\begin{ex}
+Let $x = 12$, $y = 2$ and $n = 35$ in the theorem.  Work through the example and convince yourself the theorem works.  Be sure to find a nontrivial factor of $n$ too.\\ \vspace{2in}
+\end{ex}
+
+The next part will walk through the proof of the ``basic principle."  Work as a group to understand every line of the proof.  First, let's prove a lemma:
+
+\begin{lem}
+Given integers $a, b$ and $c$.  Suppose $a \mid bc$ and $\gcd(a,b) = 1$.  Then $a \mid c$. 
+\end{lem}
+\textbf{[Prove this lemma before you move on.]}\\ \vspace{2.5in}
+
+
+\newpage Now we'll prove the theorem.
+\begin{proof}
+Let $d = \gcd(x-y,n)$.\\
+
+
+Case one: If $d = n$, then $x \equiv y \bmod n$.  \textbf{[Convince yourself this is true before you move on.]}\\  \vspace{1in}
+
+
+This is assumed not to happen, so $d \neq n$.\\
+
+Case two: Suppose $d = 1$.  Using the lemma, we can show that since $n$ divides $x^2-y^2 = (x-y)(x+y)$, then we must have that $n$ divides $x+y$.  \textbf{[Convince yourself this is true before you move on.]}\\
+\vspace{2in}
+
+This is a contradiction since we assumed $x \not\equiv -y \bmod n$.  Therefore, $d \neq 1$ and $d \neq n$, so $d$ is a nontrivial factor of $n$.\\ \vspace{.5in}
+\end{proof}
+
+
+\begin{note}
+It turns out that showing a number is composite is an easier problem than it is to factor it, so the two problems are not the same.
+\end{note}
+
+\newpage \begin{ex}
+Recall Fermat's Little Theorem.  It shows that if $p$ is prime, then $2^{p-1} \equiv 1 \bmod p$ \textbf{[Why is this true?]}.  We can use this to show that 35 is not prime without finding a factor by using \emph{successive squaring}:
+\begin{align*}
+2^4 &\equiv 16\\
+2^8 &\equiv 256 \equiv 11\\
+2^{16} &\equiv 121 \equiv 16\\
+2^{32} &\equiv 256 \equiv 11\\
+\end{align*}
+Thus, we know that $2^{34} \equiv 2^{32}2^{2} \equiv 11 \cdot 4 \equiv 8 \not\equiv 1 \mod 35.$  Using the above result from Fermat's Little Theorem, we see that $35$ cannot be prime, so it must be composite.
+\end{ex}
+
+\section{Primality Tests (which should be called Compositeness Tests)} The following tests give us different ways to test if a number is prime or not.
+\subsection{Fermat Primality Test} Let $n > 1$ be an integer.  Choose a random integer $a$ with $1 < a < n-1$.  If $a^{n-1} \not\equiv 1 \bmod n$, then $n$ is composite.  If $a^{n-1} \equiv 1 \bmod n$, then $n$ is probably prime.\\
+
+\noindent Use the Fermat Primality Test on the following small examples to verify that they probably are prime or are composite.
+\begin{enumerate}[1.]
+	\item $n = 292$\\ \vspace{.2in}
+	\item $n = 299$\\ \vspace{.2in}
+	\item $n = 757$\\ \vspace{.2in}
+\end{enumerate}
+Some short SageMath code to do this would be:
+\begin{lstlisting}
+	n = 757
+	a = 3
+	a^(n-1)%n
+\end{lstlisting}
+
+\subsection{Solovay-Strassen Primality Test} Let $n$ be an odd integer.  Choose several random integers $a$ with $1 < a < n-1$.  If the Jacobi symbol is such that $$\left( \frac{a}{n} \right) \not\equiv a^{\frac{n-1}{2}} \bmod n$$
+for some $a$, then $n$ is composite.  If 
+$$\left( \frac{a}{n} \right)  \equiv a^{\frac{n-1}{2}} \bmod n$$
+for all $a$, then $n$ is probably prime.\\
+
+\noindent Use the Solovay-Strassen Primality Test on the following small examples to verify that they probably are prime or are composite.
+\begin{enumerate}[1.]
+	\item $n = 293$\\ \vspace{.2in}
+	\item $n = 313$\\ \vspace{.2in}
+	\item $n = 427$\\ \vspace{.2in}
+\end{enumerate}
+
+You might find that the results aren't as clear here.  This is because you really need several random integers $a$ here (and that isn't a good exercise to do by hand).\\
+
+\subsection{SageMath} SageMath has a built-in primality tester.  The syntax is:
+\begin{lstlisting}
+	2 in Primes()
+\end{lstlisting}
+and the output will either be True or False (in the example, True, since 2 is prime).
+
+Go back to your First Explorations examples and determine which one is prime using SageMath:
+
+\begin{enumerate}[1.]
+	\item 292
+	\item 293
+	\item 299
+	\item 313
+	\item 427
+	\item 757
+	\item 759
+	\item 290829273
+\end{enumerate}
+
+
+\end{document}

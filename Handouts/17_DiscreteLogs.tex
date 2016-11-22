@@ -1,0 +1,128 @@
+\documentclass[12pt]{amsart}
+\pagestyle{plain}
+
+\usepackage{amsthm, setspace, framed, url, hyperref, lscape}
+\usepackage{enumerate}
+\usepackage{listings}
+
+
+\usepackage[none]{hyphenat}
+\usepackage[pdftex]{graphicx}
+\usepackage{tikz}
+\usepackage{courier}
+\makeatletter
+\def\@settitle{\begin{center}%
+  \baselineskip14\p@\relax
+  \bfseries
+  \uppercasenonmath\@title
+  \@title
+  \ifx\@subtitle\@empty\else
+     \\[1ex]\uppercasenonmath\@subtitle
+     \footnotesize\mdseries\@subtitle
+  \fi
+  \end{center}%
+}
+\def\subtitle#1{\gdef\@subtitle{#1}}
+\def\@subtitle{}
+\makeatother
+
+\setlength{\textwidth}{6.0in}
+\setlength{\textheight}{8.8in}
+\setlength{\oddsidemargin}{0.25in}
+\setlength{\evensidemargin}{0.25in}
+\setlength{\topmargin}{0in}
+
+\theoremstyle{plain}
+\newtheorem{thm}{Theorem}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem*{cor}{Corollary}
+\newtheorem{quest}{Question}
+\theoremstyle{definition}
+\newtheorem*{defn}{Definition}
+\newtheorem*{ex}{Example}
+\theoremstyle{remark}
+\newtheorem*{rem}{Remark}
+\newtheorem*{note}{Note}
+\newtheorem{case}{Case}
+
+\begin{document}
+
+\onehalfspacing
+
+\title[]{Cryptography Handout 17}
+\subtitle{Discrete Log}
+\maketitle
+
+\section{First Explorations and Definition}
+\begin{framed}
+Suppose $p$ is a prime number.  Let $\alpha$ and $\beta$ be nonzero integers. Consider the congruence $\beta \equiv \alpha ^x \bmod p$. Solving for $x$ is the \textbf{discrete log problem}.\\
+
+Notation: We write $x = L_{\alpha}(\beta)$ for the \textbf{discrete log of $\beta$ with respect to $\alpha$} and assume all computations are $\mod p$.
+\end{framed}
+
+\begin{ex}
+$p = 11$, $\alpha = 2$, $\beta = 9$. Since $2^6 \equiv 9 \bmod 11$, then $L_{2}(9) = 6$.
+\end{ex}
+
+\begin{enumerate}[1.]
+	\item Find an appropriate value of $x$ given the following, and write it as $x = L_{\alpha}(\beta)$.
+		\begin{enumerate}[a.]
+			\item $p = 11$, $\alpha = 3$, $\beta = 5$\\ \vspace{.3in}
+			\item $p = 7$, $\alpha = 4$, $\beta = 5$\\ \vspace{.3in}
+			\item $p = 13$, $\alpha = -7$, $\beta = 3$\\ \vspace{.3in} 
+		\end{enumerate}
+	\item In the discrete log problem, is $x$ unique? Justify.\\
+\end{enumerate}
+
+\newpage \section{Computing Discrete Logs}
+You should have concluded that we can find multiple values of $x$, so we tend to choose the smallest nonnegative value.  Oftentimes, $\alpha$ is a primitive root $\mod p$.
+
+Recall the following:
+\begin{itemize}
+	\item The smallest natural number $k$ such that $\alpha^k \equiv 1 \mod p$ is the \textbf{order}.
+	\item If the order is $p-1$, then $\alpha$ is a \textbf{primitive root $\mod p$.}
+	\item Every prime $p$ has $\varphi(p-1)$ primitive roots.
+\end{itemize}
+
+Suppose $p = 7$.  
+\begin{enumerate}[1.]
+	\item How many primitive roots are there?\\ \vspace{1in}
+	\item Primitive Root Case:
+	\begin{enumerate}[a.]
+		\item Verify that $\alpha = 3$ is a primitive root.\\ \vspace{1in}
+		\item Compute $\beta \equiv \alpha ^x \bmod p$ for all values $x \in \{1,2,3,4,5,6\}$.\vspace{1in}
+		\item List any observations about the values of $\beta.$\\ \vspace{1in}
+	\end{enumerate}
+	\newpage \item Not a Primitive Root Case:
+		\begin{enumerate}[a.]
+		\item Verify that $\alpha = 2$ is not a primitive root.\\ \vspace{1in}
+		\item Compute $\beta \equiv \alpha ^x \bmod p$ for all values $x \in \{1,2,3,4,5,6\}$.\vspace{1in}
+		\item List any observations about the values of $\beta.$\\ \vspace{1in}
+	\end{enumerate}
+\end{enumerate}
+
+\begin{framed}
+It turns out that when $\alpha$ is a primitive root $\mod p$, then every power $\beta$ is a power of $\alpha \bmod p$.  If $\alpha$ is not a primitive root, then the discrete log problem will not be defined for some values of $\beta$.
+\end{framed}
+
+\begin{framed}
+\textbf{Property:} The discrete log is like the usual log function.  If $\alpha$ is a primitive root $\mod p$, then we have $$L_{\alpha}(\beta_1\beta_2) \equiv L_{\alpha}(\beta_1) + L_{\alpha}(\beta_2) \bmod (p-1).$$
+\end{framed}
+
+Convince yourself that the above is true using an example.\\ 
+
+
+\newpage \section{One-Way Functions} 
+
+\begin{ex} Let $p = 41, \alpha = 7, \beta = 12$.  We want to solve $7^x \equiv 12 \bmod 41$.
+\begin{enumerate}[1.] 
+	\item Discuss strategies that you would use to solve this, and find a value of $x$.\\ \vspace{3in}
+	\item What are the challenges of such a problem? Are there any situations in which your strategies would be unreasonable to use?\\ \vspace{2in}
+\end{enumerate}
+\end{ex}
+
+\begin{framed}
+In general, the discrete log is difficult to compute.  It is an example of a \textbf{one-way function}, which means $f(x)$ is easy to find, but given $y$, it is much too computationally slow to find $x$ such that $f(x) = y$.  These functions are useful for cryptography.
+\end{framed}
+
+\end{document}

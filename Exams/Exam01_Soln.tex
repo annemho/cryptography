@@ -1,0 +1,173 @@
+\documentclass[12pt]{amsart}
+\pagestyle{plain}
+
+\usepackage{amsthm, setspace, framed, hyperref}
+\usepackage[pdftex]{graphicx}
+\usepackage{enumerate}
+\usepackage[none]{hyphenat}
+
+\usepackage[left=1in, right=1in, top=1in, bottom=1in]{geometry}
+\setlength\parindent{0pt}
+
+\theoremstyle{plain}
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem*{cor}{Corollary}
+\newtheorem{quest}{Question}
+\theoremstyle{definition}
+\newtheorem*{defn}{Definition}
+\newtheorem*{ex}{Example}
+
+\begin{document}
+\title[]{Cryptography Priority Mission 01 Solutions}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}l l}
+MATH/CSCI 408  & Name: \rule{7cm}{0.5pt} \\
+\hline\hline
+\end{tabular*} \\
+\maketitle
+
+\begin{center}\textbf{Deadline: Thursday, 29 September 2016 at 11:59pm}\\
+\end{center}
+
+
+\section{Problems}
+
+
+\begin{enumerate}[1.]
+	\item (Affine cipher) The following ciphertext used the affine cipher $x \mapsto 9x+13$:\\ \texttt{NRXOHLROKVRNKCHAHIXRJASXXITYNZXAAJCTCHKKXO}. Decrypt it.\\
+	
+	\texttt{A medium dry martini, lemon peel.  Shaken, not stirred.} (James Bond's drink.)\\
+	\begin{framed}
+	\includegraphics[height=3.4in]{01.jpg}
+	\end{framed}
+	
+	\item (Affine cipher) Suppose you encrypt using an affine cipher, then encrypt the encryption using another affine cipher (both are working $\bmod 26$).  Is there any advantage to doing this?  Why or why not?  Explain in a paragraph, and give a specific, detailed example.\\
+	
+		There is no advantage to using two affine ciphers since two affine ciphers composed together just yield another affine cipher.   For example, $f_1(x) = x+2$ and$ f_2(x) = 2x+3$.  The two composed together give $(f_1 \circ f_2)(x) = (2x+3)+2 = 2x+5$, which is just another affine cipher.  This means the same frequency analyses and methods can break it.	\\
+	
+	\item (Hill Cipher)  Barry captures Archer's Hill cipher machine, which uses a $2 \times 2$ matrix $M \bmod 26$.  He realizes that the plaintext \texttt{ba} encrypts to \texttt{HC}, and the plaintext \texttt{zz} encrypts to \texttt{GT}.  What is the matrix $M$?\\
+		
+	We have:
+	\begin{align*}
+	\texttt{b} =1 &\leftrightarrow \texttt{H}=7\\
+	\texttt{a} =0  &\leftrightarrow \texttt{C}=2\\
+	\texttt{z} =25  &\leftrightarrow \texttt{G}=6\\
+	\texttt{z} =25  &\leftrightarrow \texttt{T}=19\\
+	\end{align*}	
+	
+	The matrix setup is:
+	\begin{align*}
+	\left(\begin{array}{cc}
+	1 & 0\\
+	25 & 25
+	\end{array}\right)
+	\left(\begin{array}{cc}
+	a & b\\
+	c & d
+	\end{array}\right) &=
+	\left(\begin{array}{cc}
+	7 & 2\\
+	6 & 19
+	\end{array}\right)\\
+	\left(\begin{array}{cc}
+	a & b\\
+	c & d
+	\end{array}\right) &=
+	\left(\begin{array}{cc}
+	1 & 0\\
+	25 & 25
+	\end{array}\right)^{-1}
+	\left(\begin{array}{cc}
+	7 & 2\\
+	6 & 19
+	\end{array}\right)\\
+	&= \left(\begin{array}{cc}
+	1 & 0\\
+	25 & 25
+	\end{array}\right)
+	\left(\begin{array}{cc}
+	7 & 2\\
+	6 & 19
+	\end{array}\right)\\
+	&= \left(\begin{array}{cc}
+	7 & 2\\
+	13 & 5
+	\end{array}\right)
+	\end{align*}
+	
+	\item (Hill Cipher) Suppose you are given the following ciphertext:\\
+	\texttt{ESIZEHAXPDILHJDTBQEHSJZXXHQFIBKZJYWUQWEDKDEUDMHJTWPVQLEHHMMFKBMUZXEUZTESIZYL}\\
+	Given the encryption matrix:
+	$$\left(\begin{array}{rr}
+	1 & 5\\
+	2 & 3\\
+	\end{array}\right)$$
+	Decrypt the message.\\
+
+	The inverse of the matrix is$$\left(\begin{array}{rr}
+	7 & 23\\
+	4 & 11\\
+	\end{array}\right)$$
+	
+	We can use SageMath to decrypt:\\
+	
+	\noindent \texttt{We are not now that strength which in old days}\\
+	\texttt{Moved earth and heaven; that which we are, we are.}\\
+	(M quoting Tennyson in \emph{Skyfall}.)\\
+	
+	\begin{framed}
+	\includegraphics[height=3.4in]{04.jpg}
+	\end{framed}
+	
+	 \item (Proof) Write a proof for the following statements:\\
+		\begin{enumerate}[a.]
+			\item Let $a,b,n$ be integers.  If $\gcd(a,n) = 1$ and $\gcd(b,n) = 1$, then $\gcd(ab,n) = 1$.\\
+				
+				\begin{proof}
+				Suppose $a,b$ and $n$ are integers.  Assume $\gcd(a,n) = 1$ and $\gcd(b,n) = 1$.  Then by the theorem in class, we know that there exist integers $x,y,z,w$ in which
+				\begin{align*}
+				ax+ny &= 1\\
+				bz+nw &=1
+				\end{align*}
+				Consider 
+				\begin{align*}
+				(ax+ny)(bz+nw) &= 1\\
+				abxz+anxw+bnyz+n^2yz &= 1\\
+				ab(xz) + n(axs+byz+nyw) &=1
+				\end{align*}
+				Using the same theorem, this means that $\gcd(ab,n) = 1$.
+				\end{proof}
+				
+			\item Let $a,b,c,$ and $n$ be integers with $n > 0$.  If $a \equiv b \mod n$ and  $b \equiv c \mod n$, then\\ $a \equiv c \mod n$.\\
+			
+				\begin{proof}
+				Suppose $a,b,c,n$ are integers with $n > 0$.  Assume $a \equiv b \mod n$ and  $b \equiv c \mod n$.  This means $n \mid (a-b)$ and $n \mid (b-c)$.  In other words, $a-b = nk$ for some integer $k$ and $b-c = nl$ for some integers $l$.
+				Consider
+				\begin{align*}
+				(a-b)+(b-c) &= nk + nl\\
+				a-c &= n(k+l)
+				\end{align*}
+				So $n \mid (a-c)$ or $a \equiv c \mod n$.
+				\end{proof}
+				
+		\end{enumerate}
+	 \item (SageMath) We are using a new alphabet $\{A,B,C,D,E,F,G\}$ (perhaps corresponding to musical notes).  Associate the letters with the numbers $\{0,1,2,3,4,5,6\}$, respectively.\\
+		\begin{enumerate}[a.]
+			\item Using the shift cipher with a shift of 5, encrypt the following sequence of notes for Twinkle Twinkle Little Star: \texttt{ccggaagffeeddcggffeedggffeedccggaagffeeddc}.\\
+			
+			A shift by 5 yields: \texttt{aaeeffeddccbbaddccbbaddccbbaaaeeffeddccbba}	.\\
+			
+			\item Write a program that performs affine ciphers on the musical alphabet.  Provide the code as well as an example of output.\\
+
+			See an example below or run the file: \begin{verbatim} Exam01_Problem06b.sagews
+			\end{verbatim}
+			
+			\begin{framed}
+			\includegraphics[height=3.4in]{06b.jpg}
+			\end{framed}
+			
+		\end{enumerate}
+\end{enumerate}
+
+	
+\end{document}

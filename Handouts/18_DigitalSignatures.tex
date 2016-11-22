@@ -1,0 +1,184 @@
+\documentclass[12pt]{amsart}
+\pagestyle{plain}
+
+\usepackage{amsthm, setspace, framed, url, hyperref, lscape}
+\usepackage{enumerate}
+\usepackage{listings}
+
+
+\usepackage[none]{hyphenat}
+\usepackage[pdftex]{graphicx}
+\usepackage{tikz}
+\usepackage{courier}
+\makeatletter
+\def\@settitle{\begin{center}%
+  \baselineskip14\p@\relax
+  \bfseries
+  \uppercasenonmath\@title
+  \@title
+  \ifx\@subtitle\@empty\else
+     \\[1ex]\uppercasenonmath\@subtitle
+     \footnotesize\mdseries\@subtitle
+  \fi
+  \end{center}%
+}
+\def\subtitle#1{\gdef\@subtitle{#1}}
+\def\@subtitle{}
+\makeatother
+
+\setlength{\textwidth}{6.0in}
+\setlength{\textheight}{8.8in}
+\setlength{\oddsidemargin}{0.25in}
+\setlength{\evensidemargin}{0.25in}
+\setlength{\topmargin}{0in}
+
+\theoremstyle{plain}
+\newtheorem{thm}{Theorem}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem*{cor}{Corollary}
+\newtheorem{quest}{Question}
+\theoremstyle{definition}
+\newtheorem*{defn}{Definition}
+\newtheorem*{ex}{Example}
+\theoremstyle{remark}
+\newtheorem*{rem}{Remark}
+\newtheorem*{note}{Note}
+\newtheorem{case}{Case}
+
+\begin{document}
+
+\onehalfspacing
+
+\title[]{Cryptography Handout 18}
+\subtitle{Digital Signatures}
+\maketitle
+
+\section{First Explorations}
+Recall: cryptography is important because:
+\begin{itemize}
+	\item Confidentiality: Only Bob should be able to read Alice's message.
+	\item Data integrity: Alice's message shouldn't be altered in any way.
+	\item Authentication: Bob wants to make sure Alice actually sent the message.
+	\item Non-repudiation: Alice cannot claim she didn't send the message.
+\end{itemize}
+
+We have mostly spent time on confidentiality so far, but today we'll talk about the other three.  Start by discussing with your group some specific scenarios in which these may arise.\\
+
+\vspace{1in}
+
+
+\begin{ex}
+One example that might have come up is credit cards (e.g. signing a receipt and comparing to a credit card signature, chip and signature cards, chip and PIN cards).
+\end{ex}
+
+\begin{ex}
+Digital signatures are for electronic documents (e.g. digital leases, tax documents, student loan documents).  
+\end{ex}
+
+\begin{framed}
+Digital signature schemes consist of two steps:
+\begin{enumerate}[1.]
+	\item Signing process
+	\item Verification process
+\end{enumerate}
+\end{framed}
+
+\noindent We'll work through some digital signature schemes today.\\
+
+\noindent Bob has a document $m$ that Alice agrees to sign.  Assume that $m$ is not secret today.
+
+\newpage
+\section{RSA Signatures}
+\begin{framed}
+\begin{enumerate}[1.]
+	\item Signing process
+		\begin{enumerate}[a.]
+			\item Alice generates two large primes $p$ and $q$.  She computes $n = pq$.
+			\item She chooses $e_A$ such that $1 < e_A < \varphi(n)$ with $\gcd(e_A, \varphi(n)) = 1$.
+			\item She computes $d_A$ such that $e_Ad_A \equiv 1 \bmod \varphi(n)$.
+			\item Alice publishes $(e_A, n)$ and keeps $d_A, p, q$ private.
+			\item Her signature is $y \equiv m^{d_A} \bmod n$.  $(m, y)$ are made public.
+		\end{enumerate}
+	\item Verification process
+	\begin{enumerate}[a.]
+		\item Bob gets Alice's $(e_A, n)$.  He computes $z \equiv y^{e_A} \bmod n$.
+		\item If $z = m$, then Bob accepts the signature as valid.  Otherwise, the signature is not valid.
+	\end{enumerate}
+\end{enumerate}
+\end{framed}
+
+
+
+\begin{quest}
+Work through the RSA signature example with the following:
+\begin{itemize}
+	\item $p = 7, q = 13$
+	\item $m = 35$
+\end{itemize}
+\end{quest}
+\vspace{2in}
+
+Suppose Eve wants to attach Alice's signature to another message $m_1$.  She can't just use $(m_1,y)$ since $y^{e_A} \not\equiv m_1 \bmod n$.
+
+\begin{quest}
+Show this using the example above.  If $m_1 = 30$, what is $y^{e_A} \bmod n$?\\ \vspace{1in}
+
+Since this doesn't match, then Alice didn't actually sign the document.
+\end{quest}
+
+\newpage
+\section{Blind Signatures - RSA}
+In some cases, a message is ``blinded" or disguised before it is signed.
+
+\begin{ex}
+Electronic voting systems might require that each ballot is certified by an election authority (Alice) before it can be accepted for counting.  This allows Alice to check to make sure the voter (Bob) doesn't vote twice while also not being able to see the voter's actual ballot.
+\end{ex}
+
+\begin{framed}
+\begin{enumerate}[1.]
+	\item Alice chooses two primes $p$ and $q$.  Then she computes $n = pq$.
+	\item Alice also chooses an encryption exponent $e$ and decryption exponent $d$.
+	\item $(n,e)$ are public whereas $p,q,d$ are private.
+	\item Bob chooses a random integer $k \bmod n$ with $\gcd(k,n) = 1$ and computes $t \equiv k^e m \bmod n$.  He sends $t$ to Alice.
+	\item Alice signs $t$ by computing $s \equiv t^d \bmod n$.  She gives $s$ to Bob.
+	\item Bob computes $s/k \bmod n$.  This is the signed message $m^d.$
+\end{enumerate}
+\end{framed}
+
+\begin{quest}
+Show that $s/k$ is actually the signed message $m^d$ (i.e. show that $s/k \equiv m^d \bmod n$).\\ \vspace{2in}
+\end{quest}
+
+\newpage
+\section{ElGamal Signature Scheme}
+The ElGamal Encryption method can also be modified to give a signature scheme.
+
+\begin{framed}
+Before she gets started, Alice chooses a prime $p$ and a primitive root $\alpha$.  She chooses a secret integer $a$ such that $1 \leq a \leq p-2$ and calculates $\beta \equiv \alpha^a \bmod p$.  $(p, \alpha, \beta)$ are made public while $a$ is private.
+\begin{enumerate}[1.]
+	\item Signing process
+		\begin{enumerate}[a.]
+			\item Alice chooses a secret random $k$ such that $\gcd(k,p-1) = 1$.
+			\item She computes $r \equiv \alpha^k \bmod p \text{ with } 0 < r < p$.
+			\item She also computes $s \equiv k^{-1}(m-ar) \bmod (p-1).$  The signed message is $(m,r,s)$.
+		\end{enumerate}
+	\item Verification process
+	\begin{enumerate}[a.]
+		\item Bob gets Alice's public key $(p, \alpha, \beta)$.
+		\item He computes $v_1 \equiv \beta^r r^s \bmod p$ and $v_2 \equiv \alpha^m \bmod p$.
+		\item The signature is valid if and only if $v_1 \equiv v_2 \bmod p$.
+	\end{enumerate}
+\end{enumerate}
+\end{framed}
+
+\begin{quest}
+Show that the verification process works.  Assume the signature is valid with the following steps:\\
+\begin{itemize}
+	\item Since $s \equiv k^{-1}(m-ar) \bmod p-1$, then $sk \equiv \underline{\hspace{1in}} \bmod (p-1)$.\\
+	\item This means $m \equiv  \underline{\hspace{1.5in}} \bmod (p-1)$.\\
+	\item A congruence $\mod p-1$ in the exponent yields an overall congruence $\mod p$, so we have:
+		$$v_2 \equiv \alpha^m \equiv  \underline{\hspace{3in}} \equiv v_1 \bmod p$$
+\end{itemize}
+\end{quest}
+
+\end{document}
