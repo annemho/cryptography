@@ -1,0 +1,150 @@
+\documentclass[12pt]{amsart}
+\pagestyle{plain}
+
+\usepackage{amsthm, setspace, framed, url, hyperref, lscape}
+\usepackage{enumerate}
+\usepackage{listings}
+
+
+\usepackage[none]{hyphenat}
+\usepackage[pdftex]{graphicx}
+\usepackage{tikz}
+\usepackage{courier}
+\makeatletter
+\def\@settitle{\begin{center}%
+  \baselineskip14\p@\relax
+  \bfseries
+  \uppercasenonmath\@title
+  \@title
+  \ifx\@subtitle\@empty\else
+     \\[1ex]\uppercasenonmath\@subtitle
+     \footnotesize\mdseries\@subtitle
+  \fi
+  \end{center}%
+}
+\def\subtitle#1{\gdef\@subtitle{#1}}
+\def\@subtitle{}
+\makeatother
+
+\setlength{\textwidth}{6.0in}
+\setlength{\textheight}{8.8in}
+\setlength{\oddsidemargin}{0.25in}
+\setlength{\evensidemargin}{0.25in}
+\setlength{\topmargin}{0in}
+
+\theoremstyle{plain}
+\newtheorem{thm}{Theorem}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem*{cor}{Corollary}
+\newtheorem{quest}{Question}
+\theoremstyle{definition}
+\newtheorem*{defn}{Definition}
+\newtheorem*{ex}{Example}
+\theoremstyle{remark}
+\newtheorem*{rem}{Remark}
+\newtheorem*{note}{Note}
+\newtheorem{case}{Case}
+
+\begin{document}
+
+\onehalfspacing
+
+\title[]{Cryptography Handout 19}
+\subtitle{Pigeon Birthday Parties}
+\maketitle
+
+\section{Pigeons}
+\begin{enumerate}[1.]
+	\item There are 11 children in a family.  Show that at least 2 of the children were born on the same day of the week.\\ \vspace{1.5in}
+	\item Assuming the 11 children live with their 2 parents, show that 2 family members were born in the same month.\\ \vspace{1.5in}
+	\item There are 430 students taking Calculus I.  Show at least 2 of them were born on the same day of the year.\\ \vspace{1.5in}
+\end{enumerate}
+
+\newpage \begin{framed}
+\noindent \textbf{The Pigeonhole Principle (aka Dirichlet's Box Principle)} If there are $k$ pigeonholes, $n$ pigeons, and $n > k$, then at least one pigeonhole contains at least 2 pigeons.
+\end{framed}
+
+Apply the Pigeonhole Principle to the following problem:\\
+ If there are $n$ people who can shake hands with one another, show that there is always a pair of people who will shake hands with the same number of people. [Hint: what are the pigeons and what are the pigeonholes?]\\ \vspace{2.5in}
+
+
+\section{The Birthday Problem}
+We'll look at a related problem now in this section, known as the Birthday Problem, which is stated as follows:\\
+
+If there are $n$ people, what is the probability that some pair of them will have the same birthday (assuming 366 possible birthdays and that each day of the year is equally probably for a birthday)?\\
+
+\begin{enumerate}[1.]
+	\item Come up with some initial ideas here.\\
+	\newpage \item It's easier to compute the probability that no two people have the same birthday.  Start with $n = 2$.  Say that the first person's birthday is on a certain day.  Then the second person has probability $(1-\frac{1}{366}) \approx .9973$ of having a different birthday.  Make sure this makes sense to you before you move on.\\ \vspace{.5in}
+	\item What is the probability that $n = 2$ people have the same birthday?\\ \vspace{.5in}
+	\item If $n = 3$, the probability that no two people have the same birthday is $$(1-\frac{1}{366})(1-\frac{2}{366}) \approx .9918.$$  Why?\\ \vspace{.5in}
+	\item What is the probability that two people out of $n = 3$ have the same birthday?\\ \vspace{.5in}
+	\item What do you think is the general probability that out of $n$ people, two have the same birthday?\\ \vspace{.5in}
+\end{enumerate}
+
+Facts:
+\begin{itemize}
+	\item When $n = 367$, the probability that two people have the same birthday is 1 (Why?).
+	\item When $n = 70$, the probability is .999.
+	\item When $n = 23$, the probability is .5.
+\end{itemize}
+
+\begin{framed}
+\noindent Conclusion: it's actually probable pretty quickly (for small $n$) to have two people with the same birthday.  We'll use this idea in the next section.
+\end{framed}
+
+\section{Pigeon Birthday Parties}
+\begin{framed}
+\noindent A \textbf{cryptographic hash function} $h$ takes an input or message $m$ of arbitrary length and produces an output $h(m)$ of a fixed length.  These output values are \textbf{hash values} or \textbf{hashes}.\\
+
+\noindent \textbf{Properties.}
+\begin{enumerate}[1.]
+	\item $h(m)$ is quick to compute.
+	\item $h$ is a \emph{one-way function}, meaning it is computationally infeasible to find a preimage.  i.e. given a hash $y$, it's hard to find $m$ such that $h(m) = y$.
+	\item $h$ is \emph{strongly collision-free}, meaning it is computationally infeasible to find messages $m_1$ and $m_2$ such that $h(m_1) = h(m_2)$.
+\end{enumerate}
+\end{framed}
+
+\begin{center}
+\textbf{Make sure the definition and properties make sense to you before you move on.}
+\end{center}
+
+\begin{ex}
+The discrete log hash function is defined as follows:\
+\begin{enumerate}[1.]
+	\item Choose a large prime $p$ such that $q = \frac{p-1}{2}$ is also prime.
+	\item Choose 2 primitive roots $\alpha$ and $\beta$ for $p$.  Since $\alpha$ is a primitive root, there exists some number $x$ such that $\alpha^x \equiv \beta \bmod p$.  Finding $x$ is hard (this is the discrete log problem).
+	\item Write the message $m$ as $m = x_0 + x_1 q$ for $0 \leq x_0, x_1 \leq q-1$.
+	\item The hash function is $h(m) = \alpha^{x_0}\beta^{x_1} \bmod p$.
+\end{enumerate}
+\end{ex}
+
+\begin{center}
+\textbf{A specific example with numbers chosen is hard to find, but make sure the example above makes sense to you before you move on.}
+\end{center}
+
+\begin{framed}
+\noindent Recall: Digital signatures are used to verify that messages $m$ are authentic.  Last time, we talked about RSA Signatures and the ElGamal Signature Scheme.\\
+
+Since the process can be long to sign an entire message, sometimes a signature scheme is applied to as hash rather than the actual message.  i.e. Alice has a message $m$.  She computes the hash $h(m)$, which is much shorter, and she applies the signature scheme to $h(m)$, producing $\textup{sig}(h(m))$.  The pair $(m, \textup{sig}(h(m)))$ conveys the same knowledge as $(m, \textup{sig}(m))$ but is shorter.
+\end{framed}
+
+\begin{center}
+\textbf{Make sure this makes sense to you before you move on.}
+\end{center}
+
+It turns out that digital signatures are susceptible to \textbf{birthday attacks}, which can be explained in the scenario below:\\
+
+Suppose Eve (the pigeon) wants to trick Alice (also a pigeon) into signing a fraudulent contract online.  She does the following:\\
+\begin{itemize}
+	\item Eve has a fair contract $m$.  She creates several copies with minor edits of $m$ that basically are still the same (e.g. adding commas, removing commas, using synonyms, and other minor edits).
+	\item Eve also creates a fraudulent contract $m'$ and also makes several copies with minor edits of $m'$ that are basically the same.
+	\item She applies a hash function to all variations until $h(m) = h(m')$.\\  \textbf{Why is this likely to happen?}
+	\item Eve presents a fair contract to Alice to sign.  Alice signs this.  Eve takes Alice's signature and appends it to the fraudulent contract with the same hash.  Because they have the same hash, the fraudulent contract seems valid.\\ \vspace{2in}
+\end{itemize}
+
+\begin{center}
+\textbf{Last task: discuss ways Alice might try to prevent a birthday attack.}
+\end{center}
+
+\end{document}
