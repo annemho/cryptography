@@ -33,16 +33,26 @@ Boulder) course.  All of my code is short and can be run on https://sagecell.sag
 The Day One Cryptography presentation can be found here: http://tinyurl.com/16AnneHoCrypto
 
 Other presentations:
+
 --Factoring: http://tinyurl.com/16AnneHoCrypto-Factoring
+
 --DES and Passwords: http://tinyurl.com/16AnneHoCrypto-DES-Passwords
+
 --RSA: http://tinyurl.com/16AnneHoCrypto-RSA
+
 --Attacks on RSA: http://tinyurl.com/16AnneHoCrypto-AttacksRSA
+
 --Discrete Log and ElGamal: http://tinyurl.com/16AnneHoCrypto-DiscLog-ElGamal
+
 --Digital Signatures: http://tinyurl.com/16AnneHoCrypto-Signature
+
 --Secret Sharing: http://tinyurl.com/16AnneHoCrypto-Secret
+
 --Current Issues Debate: http://tinyurl.com/16AnneHoCrypto-CurrentIssues
+
 --DDoS: http://tinyurl.com/16AnneHoCrypto-DDoS
 
-Lecture notes are currently handwritten and might be added in the future 
+
+Other lecture notes are currently handwritten and might be added in the future 
 (either as scans or as .tex files). Please contact me (currently at 
 aho@coastal.edu) with any questions.
