@@ -17,7 +17,7 @@ Course Information: This is a lecture-based class which introduces
 students to the fundamentals of cryptography and cryptanalysis, 
 primarily focusing on data encryption and decryption.
 
-I taught this course during the Fall 2016 semester.  Note: This was the semester Hurricane Matthew came through, so everything got shifted back, but all the original topics were still covered (albeit some in less detail).
+I taught this course during the Fall 2016 semester and am teaching it again during Fall 2017.  Note: Fall 2016 was the semester Hurricane Matthew came through, so everything got shifted back, but all the original topics were still covered (albeit some in less detail).  New material will be added throughout the Fall 2017 semester.
 
 Files (mostly .tex files and necessary files to compile as well as .sagews code)
 
@@ -27,7 +27,7 @@ Files (mostly .tex files and necessary files to compile as well as .sagews code)
 
 --Syllabus
 
---Some SageMath code, much of this is based on Kate Stange's (CU 
+--Some CoCalc (formerly SageMath) code, much of this is based on Kate Stange's (CU 
 Boulder) course.  All of my code is short and can be run on https://sagecell.sagemath.org/
 
 The Day One Cryptography presentation can be found here: http://tinyurl.com/16AnneHoCrypto
