@@ -1,0 +1,232 @@
+\documentclass[12pt]{amsart}
+\pagestyle{plain}
+
+\usepackage{amsthm, setspace, framed, url, hyperref, lscape}
+\usepackage{enumerate}
+
+\usepackage[none]{hyphenat}
+\usepackage[pdftex]{graphicx}
+\usepackage{enumerate}
+\usepackage{tikz}
+\usepackage{courier}
+\makeatletter
+\def\@settitle{\begin{center}%
+  \baselineskip14\p@\relax
+  \bfseries
+  \uppercasenonmath\@title
+  \@title
+  \ifx\@subtitle\@empty\else
+     \\[1ex]\uppercasenonmath\@subtitle
+     \footnotesize\mdseries\@subtitle
+  \fi
+  \end{center}%
+}
+\def\subtitle#1{\gdef\@subtitle{#1}}
+\def\@subtitle{}
+\makeatother
+
+\setlength{\textwidth}{6.0in}
+\setlength{\textheight}{8.8in}
+\setlength{\oddsidemargin}{0.25in}
+\setlength{\evensidemargin}{0.25in}
+\setlength{\topmargin}{0in}
+
+\theoremstyle{plain}
+\newtheorem{thm}{Theorem}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem*{cor}{Corollary}
+\newtheorem{quest}{Question}
+\theoremstyle{definition}
+\newtheorem*{defn}{Definition}
+\newtheorem*{ex}{Example}
+\theoremstyle{remark}
+\newtheorem*{rem}{Remark}
+\newtheorem*{note}{Note}
+\newtheorem{case}{Case}
+
+\begin{document}
+
+\onehalfspacing
+
+\title[]{Cryptography Handout 15}
+\subtitle{Number Theory Practice Solutions}
+\maketitle
+
+\begin{enumerate}[1.]
+	\item Use the Euclidean Algorithm to find the $\gcd$ for the following pairs of numbers:
+	\begin{enumerate}[a.]
+		\item $\gcd(14129,9353)$
+			\begin{framed}
+			$\gcd(14129,9353) = 199$
+			\end{framed}
+		\item $\gcd(30073, 12749)$
+			\begin{framed}
+			$\gcd(30073, 12749) = 61$
+			\end{framed}
+	\end{enumerate}
+	\item Compute the Euler Phi Function for the following:
+	\begin{enumerate}[a.]	
+		\item $\varphi(25)$
+			\begin{framed}
+			20
+			\end{framed}
+		\item $\varphi(40)$
+			\begin{framed}
+			16
+			\end{framed}	
+		\item $\varphi(29)$
+			\begin{framed}
+			28
+			\end{framed}
+		\item $\varphi(17)$
+			\begin{framed}
+			16
+			\end{framed}
+		\item $\varphi(p)$ where $p$ is a prime
+			\begin{framed}
+			$p-1$
+			\end{framed}
+	\end{enumerate}
+	\item Use Fermat's Little Theorem to evaluate the following:
+		\begin{enumerate}[a.]
+			\item $11^{12} \bmod 13$
+				\begin{framed}
+				$1 \bmod 13$
+				\end{framed}
+			\newpage \item $11^{13} \bmod 13$
+				\begin{framed}
+				$11^{12}\cdot 11 \bmod 13 \equiv 1 \cdot 11 \bmod 13 \equiv 11 \bmod 13$
+				\end{framed}
+			\item $88^{100} \bmod 101$
+				\begin{framed}
+				$1 \bmod 101$
+				\end{framed}
+			\item $a^{100} \bmod 101$ for some number $a$
+				\begin{framed}
+				$1 \bmod 101$
+				\end{framed}
+			\item $88^{203} \bmod 101$
+				\begin{framed}
+				${(88^{2}})^{100}\cdot 88^3 \bmod 101 \equiv 88^3 \bmod 101 \equiv 25 \bmod 101$
+				\end{framed}
+		\end{enumerate}
+		\item Use Euler's Theorem to evaluate the following:
+		\begin{enumerate}[a.]
+			\item $23^{20} \bmod 25$
+				\begin{framed}
+				$1 \bmod 25$
+				\end{framed}
+			\item $23^{21} \bmod 25$
+				\begin{framed}
+				$23^{20}\cdot 23 \bmod 25 \equiv 1 \cdot 23 \bmod 25 \equiv 23 \bmod 25$
+				\end{framed}
+			\item $31^{16} \bmod 40$
+				\begin{framed}
+				$1 \bmod 40$
+				\end{framed}
+			\item $a^{16} \bmod 40$ for some number $a$
+				\begin{framed}
+				$1 \bmod 40$
+				\end{framed}
+			\item $17^{55} \bmod 40$
+				\begin{framed}
+				${(17^{3}})^{16}\cdot 17^7 \bmod 40 \equiv 17^7 \bmod 40 \equiv 33 \bmod 40$
+				\end{framed}
+		\end{enumerate}
+		\item Determine the order of the following numbers $a$ and primes $p$ (recall the order is the smallest power $k$ in which $a^k \equiv 1 \bmod p$):
+		\begin{enumerate}[a.]
+			\item $a = 3, p = 7$
+				\begin{framed}
+				$k = 6$
+				\end{framed}
+			\newpage \item $a = 2, p = 7$
+				\begin{framed}
+				$k = 3$
+				\end{framed}
+			\item $a = 3, p = 23$
+				\begin{framed}
+				$k = 11$
+				\end{framed}
+			\item $a = 7, p = 13$
+				\begin{framed}
+				$k = 12$
+				\end{framed}
+		\end{enumerate}         
+		\item In the previous question, which values are primitive roots (i.e. the order is $p-1$)?
+			\begin{framed}
+			$3$ is a primitive root when $p =  7$.  Also, $7$ is a primitive root when $p = 13$.
+			\end{framed}
+		
+		\item Given an integer $a$ and an odd prime $p$, determine if $a$ is a square mod $p$ (use Euler's Criterion).
+		\begin{enumerate}[a.]
+			\item $a = 3, p = 7$
+				\begin{framed}
+				$3^{\frac{7-1}{2}} \equiv -1 \bmod 7$ so 3 is not a square mod 7.
+				\end{framed}
+			\item $a = 10, p = 13$
+				\begin{framed}
+				$10^{\frac{13-1}{2}} \equiv 1 \bmod 13$ so 10 is  a square mod 13.
+				\end{framed}
+			\item $a = 10, p = 17$
+				\begin{framed}
+				$10^{\frac{17-1}{2}} \equiv -1 \bmod 7$ so 10 is not a square mod 17.
+				\end{framed}
+			\item $a = 45, p = 199$
+				\begin{framed}
+				$45^{\frac{199-1}{2}} \equiv 1 \bmod 199$ so 45 is  a square mod 199.
+				\end{framed}
+		\end{enumerate}
+		\item Use the Legendre symbol $\left( \frac{a}{p}\right)$ to determine whether $a = -1$ is a square or not for the following primes $p$:
+		\begin{enumerate}[a.]
+			\item $p = 17$
+				\begin{framed}
+				$17 \bmod 4 \equiv 1 \bmod 4$, so it is a square.
+				\end{framed}
+			\newpage \item $p =  59$
+				\begin{framed}
+				$59 \bmod 4 \equiv 3 \bmod 4$, so it is not a square.
+				\end{framed}
+			\item $p = 83$
+				\begin{framed}
+				$83 \bmod 4 \equiv 3 \bmod 4$, so it is not a square.
+				\end{framed}
+		\end{enumerate}
+		\item First, complete the following table.  Then use Euler's Criterion and Quadratic Reciprocity to determine the next questions.
+			\begin{center}
+			\begin{tabular}{|p{1in}|p{3in}|} \hline
+			Prime $p$ & Congruent to $1 \bmod 4$ or $3 \bmod 4$?\\ \hline
+			19 & 3\\
+			29 & 1\\
+			61 & 1\\
+			67 & 3\\ \hline
+			\end{tabular}
+			\end{center}
+		\begin{enumerate}[a.]
+			\item $\left(\frac{19}{29}\right)$
+				\begin{framed}
+				-1
+				\end{framed}
+			\item $\left(\frac{29}{19}\right)$
+				\begin{framed}
+				-1
+				\end{framed}
+			\item $\left(\frac{29}{61}\right)$
+				\begin{framed}
+				-1
+				\end{framed}
+			\item $\left(\frac{61}{29}\right)$
+				\begin{framed}
+				-1
+				\end{framed}
+			\item $\left(\frac{67}{19}\right)$
+				\begin{framed}
+				-1
+				\end{framed}
+			\item $\left(\frac{19}{67}\right)$
+				\begin{framed}
+				1
+				\end{framed}
+		\end{enumerate}
+\end{enumerate}
+
+\end{document}
