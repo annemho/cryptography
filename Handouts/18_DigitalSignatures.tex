@@ -50,51 +50,17 @@
 \onehalfspacing
 
 \title[]{Cryptography Handout 18}
-\subtitle{Digital Signatures}
+\subtitle{Digital Signatures (Guided Notes)}
 \maketitle
 
-\section{First Explorations}
-Recall: cryptography is important because:
-\begin{itemize}
-	\item Confidentiality: Only Bob should be able to read Alice's message.
-	\item Data integrity: Alice's message shouldn't be altered in any way.
-	\item Authentication: Bob wants to make sure Alice actually sent the message.
-	\item Non-repudiation: Alice cannot claim she didn't send the message.
-\end{itemize}
-
-We have mostly spent time on confidentiality so far, but today we'll talk about the other three.  Start by discussing with your group some specific scenarios in which these may arise.\\
-
-\vspace{1in}
-
-
-\begin{ex}
-One example that might have come up is credit cards (e.g. signing a receipt and comparing to a credit card signature, chip and signature cards, chip and PIN cards).
-\end{ex}
-
-\begin{ex}
-Digital signatures are for electronic documents (e.g. digital leases, tax documents, student loan documents).  
-\end{ex}
-
-\begin{framed}
-Digital signature schemes consist of two steps:
-\begin{enumerate}[1.]
-	\item Signing process
-	\item Verification process
-\end{enumerate}
-\end{framed}
-
-\noindent We'll work through some digital signature schemes today.\\
-
-\noindent Bob has a document $m$ that Alice agrees to sign.  Assume that $m$ is not secret today.
-
-\newpage
 \section{RSA Signatures}
 \begin{framed}
+Bob has a document or message $m$ that Alice agrees to sign.
 \begin{enumerate}[1.]
 	\item Signing process
 		\begin{enumerate}[a.]
 			\item Alice generates two large primes $p$ and $q$.  She computes $n = pq$.
-			\item She chooses $e_A$ such that $1 < e_A < \varphi(n)$ with $\gcd(e_A, \varphi(n)) = 1$.
+			\item She chooses $e_A$ where $1 < e_A < \varphi(n)$ with $\gcd(e_A, \varphi(n)) = 1$.
 			\item She computes $d_A$ such that $e_Ad_A \equiv 1 \bmod \varphi(n)$.
 			\item Alice publishes $(e_A, n)$ and keeps $d_A, p, q$ private.
 			\item Her signature is $y \equiv m^{d_A} \bmod n$.  $(m, y)$ are made public.
@@ -107,32 +73,52 @@ Digital signature schemes consist of two steps:
 \end{enumerate}
 \end{framed}
 
+\begin{ex}
+\begin{enumerate}[1.]
+	\item[] $m = 35$
+	\item Signing process: $p = 7, q = 13$
+		\begin{enumerate}[a.]
+			\item $n = \underline{\hspace{1in}}$
+			\item $\varphi(n) = \underline{\hspace{1in}}$
+				$e_A = \underline{\hspace{1in}}$
+			\item $d_A = \underline{\hspace{1in}}$
+			\item Public info: $(e_A, n)= \underline{\hspace{1in}}$
+			\item Alice's Signature: $y = \underline{\hspace{1in}}$
+		\end{enumerate}
+	\item Verification Process: Bob sees $(e_A, n)$ and $(m,y) = \underline{\hspace{1in}}$.
+		\begin{enumerate}
+			\item He computes $z = \underline{\hspace{1in}}$
+			\item Is the signature valid or not?
+		\end{enumerate}
+\end{enumerate}
+\vspace{1in}
+\end{ex}
 
+\newpage \begin{ex}
+\begin{enumerate}[1.]
+	\item[] $m = 14$
+	\item Signing process: $p = 11, q = 17$
+		\begin{enumerate}[a.]
+			\item $n = \underline{\hspace{1in}}$
+			\item $\varphi(n) = \underline{\hspace{1in}}$
+				$e_A = 7$ works here because $\gcd(7,\varphi(n)) =  \underline{\hspace{1in}}$
+			\item $d_A =183$ works here because $e_Ad_A \equiv 1 \bmod \varphi(n)$.  Check this:  $\underline{\hspace{1in}}$
+			\item Public info: $(e_A, n)= \underline{\hspace{1in}}$
+			\item Alice's Signature: $y = \underline{\hspace{1in}}$
+		\end{enumerate}
+	\item Verification Process: Bob sees $(e_A, n)$ and $(m,y) = \underline{\hspace{1in}}$.
+		\begin{enumerate}
+			\item He computes $z = \underline{\hspace{1in}}$
+			\item Is the signature valid or not?\\
+		\end{enumerate}
+\end{enumerate}
+What if during the verification process, Bob had received $(m,y) = (14,158)$ instead?  What would he conclude?
+\vspace{.5in}
+\end{ex}
 
-\begin{quest}
-Work through the RSA signature example with the following:
-\begin{itemize}
-	\item $p = 7, q = 13$
-	\item $m = 35$
-\end{itemize}
-\end{quest}
-\vspace{2in}
-
-Suppose Eve wants to attach Alice's signature to another message $m_1$.  She can't just use $(m_1,y)$ since $y^{e_A} \not\equiv m_1 \bmod n$.
-
-\begin{quest}
-Show this using the example above.  If $m_1 = 30$, what is $y^{e_A} \bmod n$?\\ \vspace{1in}
-
-Since this doesn't match, then Alice didn't actually sign the document.
-\end{quest}
-
-\newpage
 \section{Blind Signatures - RSA}
 In some cases, a message is ``blinded" or disguised before it is signed.
 
-\begin{ex}
-Electronic voting systems might require that each ballot is certified by an election authority (Alice) before it can be accepted for counting.  This allows Alice to check to make sure the voter (Bob) doesn't vote twice while also not being able to see the voter's actual ballot.
-\end{ex}
 
 \begin{framed}
 \begin{enumerate}[1.]
@@ -141,15 +127,38 @@ Electronic voting systems might require that each ballot is certified by an elec
 	\item $(n,e)$ are public whereas $p,q,d$ are private.
 	\item Bob chooses a random integer $k \bmod n$ with $\gcd(k,n) = 1$ and computes $t \equiv k^e m \bmod n$.  He sends $t$ to Alice.
 	\item Alice signs $t$ by computing $s \equiv t^d \bmod n$.  She gives $s$ to Bob.
-	\item Bob computes $s/k \bmod n$.  This is the signed message $m^d.$
+	\item Bob computes $s/k \bmod n$, which is $m^d$.
 \end{enumerate}
 \end{framed}
 
+\begin{ex}
+\begin{enumerate}[1.]
+	\item[] $m = 11$
+	\item $p = 7, q = 13$, so $n = pq = \underline{\hspace{1in}}$
+	\item $e = 5$ and $d = 29$ because $de \equiv 1 \bmod \varphi(n)$.  Verify this:  $\underline{\hspace{1in}}$
+	\item $(n,e) = \underline{\hspace{1in}}$
+	\item $k = \underline{\hspace{1in}}$ since $\gcd(k,n) = 1$.  He computes $t = \underline{\hspace{1in}}$
+	\item $s = \underline{\hspace{1in}}$
+	\item $s/k = \underline{\hspace{1in}}$ which should match up with $m^d = \underline{\hspace{1in}}$
+\end{enumerate}
+\end{ex}
+
+\newpage \begin{ex}
+\begin{enumerate}[1.]
+	\item[] $m = 23$
+	\item $p = 11, q = 17$, so $n = pq = \underline{\hspace{1in}}$
+	\item $e = 7$ and $d = 183$ because $de \equiv 1 \bmod \varphi(n)$.  Verify this:  $\underline{\hspace{1in}}$
+	\item $(n,e) = \underline{\hspace{1in}}$
+	\item $k = \underline{\hspace{1in}}$ since $\gcd(k,n) = 1$.  He computes $t = \underline{\hspace{1in}}$
+	\item $s = \underline{\hspace{1in}}$
+	\item $s/k = \underline{\hspace{1in}}$ which should match up with $m^d = \underline{\hspace{1in}}$
+\end{enumerate}
+\end{ex}
+
 \begin{quest}
-Show that $s/k$ is actually the signed message $m^d$ (i.e. show that $s/k \equiv m^d \bmod n$).\\ \vspace{2in}
+Show that $s/k$ is actually the signed message $m^d$.\\ \vspace{2in}
 \end{quest}
 
-\newpage
 \section{ElGamal Signature Scheme}
 The ElGamal Encryption method can also be modified to give a signature scheme.
 
@@ -171,13 +180,30 @@ Before she gets started, Alice chooses a prime $p$ and a primitive root $\alpha$
 \end{enumerate}
 \end{framed}
 
+\newpage \begin{ex}
+Before she gets started, Alice chooses a prime $p = 17$ and a primitive root $\alpha = 3$.  She chooses a secret integer $a = 4$ such that $1 \leq a \leq p-2$ and calculates $\beta \equiv \alpha^a \bmod p = \underline{\hspace{1in}}$.  $(p, \alpha, \beta) = \underline{\hspace{1in}}$ are made public while $a$ is private.
+\begin{enumerate}[1.]
+	\item Signing process
+		\begin{enumerate}[a.]
+			\item $k = 5$ since $\gcd(k,p-1) = 1$.  Verify this: $\underline{\hspace{1in}}$.
+			\item $r = \underline{\hspace{1in}}$
+			\item $s = \underline{\hspace{1in}}$.  The signed message is $(m,r,s) = \underline{\hspace{1in}}$.
+		\end{enumerate}
+	\item Verification process
+	\begin{enumerate}[a.]
+		\item Bob gets Alice's public key $(p, \alpha, \beta)$.
+		\item $v_1 = \underline{\hspace{1in}}$ and $v_2 = \underline{\hspace{1in}}$.
+		\item The signature is valid if and only if $v_1 \equiv v_2 \bmod p$.
+	\end{enumerate}
+\end{enumerate}
+\end{ex}
+
 \begin{quest}
 Show that the verification process works.  Assume the signature is valid with the following steps:\\
 \begin{itemize}
 	\item Since $s \equiv k^{-1}(m-ar) \bmod p-1$, then $sk \equiv \underline{\hspace{1in}} \bmod (p-1)$.\\
-	\item This means $m \equiv  \underline{\hspace{1.5in}} \bmod (p-1)$.\\
+	\item This means $m \equiv  \underline{\hspace{1in}} \bmod (p-1)$.\\
 	\item A congruence $\mod p-1$ in the exponent yields an overall congruence $\mod p$, so we have:
-		$$v_2 \equiv \alpha^m \equiv  \underline{\hspace{3in}} \equiv v_1 \bmod p$$
 \end{itemize}
 \end{quest}
 

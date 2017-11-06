@@ -30,28 +30,21 @@ Files (mostly .tex files and necessary files to compile as well as .sagews code)
 --Some CoCalc (formerly SageMath) code, much of this is based on Kate Stange's (CU 
 Boulder) course.  All of my code is short and can be run on https://sagecell.sagemath.org/
 
-The Day One Cryptography presentation can be found here: http://tinyurl.com/16AnneHoCrypto
+The Day One Cryptography presentation can be found here: https://tinyurl.com/ccu-crypto-day1
 
 Other presentations:
 
---Factoring: http://tinyurl.com/16AnneHoCrypto-Factoring
+--Factoring: https://tinyurl.com/ccu-crypto-factoring
 
---DES and Passwords: http://tinyurl.com/16AnneHoCrypto-DES-Passwords
+--DES, AES, and Passwords: https://tinyurl.com/ccu-crypto-DES-AES-Passwords
 
---RSA: http://tinyurl.com/16AnneHoCrypto-RSA
+--RSA: https://tinyurl.com/ccu-crypto-RSA
 
---Attacks on RSA: http://tinyurl.com/16AnneHoCrypto-AttacksRSA
+--Discrete Log and ElGamal: https://tinyurl.com/ccu-crypto-DiscreteLog-ElGamal
 
---Discrete Log and ElGamal: http://tinyurl.com/16AnneHoCrypto-DiscLog-ElGamal
+--Digital Signatures: https://tinyurl.com/ccu-crypto-DigitalSignatures
 
---Digital Signatures: http://tinyurl.com/16AnneHoCrypto-Signature
-
---Secret Sharing: http://tinyurl.com/16AnneHoCrypto-Secret
-
---Current Issues Debate: http://tinyurl.com/16AnneHoCrypto-CurrentIssues
-
---DDoS: http://tinyurl.com/16AnneHoCrypto-DDoS
-
+--Secret Sharing: https://tinyurl.com/ccu-crypto-Secrets
 
 Other lecture notes are currently handwritten and might be added in the future 
 (either as scans or as .tex files). Please contact me (currently at 
