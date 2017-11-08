@@ -1,0 +1,75 @@
+\documentclass[12pt]{amsart}
+\pagestyle{plain}
+
+\usepackage{amsthm, setspace, framed, hyperref}
+\usepackage[pdftex]{graphicx}
+\usepackage{enumerate}
+
+\usepackage[left=1in, right=1in, top=1in, bottom=1in]{geometry}
+\setlength\parindent{0pt}
+
+\theoremstyle{plain}
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem*{cor}{Corollary}
+\newtheorem{quest}{Question}
+\theoremstyle{definition}
+\newtheorem*{defn}{Definition}
+\newtheorem*{ex}{Example}
+
+\begin{document}
+\title[]{Cryptography Mission 01 Dossier}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}l l}
+MATH/CSCI 408  & Name: \rule{7cm}{0.5pt} \\
+\hline\hline
+\end{tabular*} \\
+\maketitle
+
+\begin{center}\textbf{Deadline: Thursday, 24 August 2017 at 10:50am}\\
+
+This mission covers the syllabus, setting up CoCalc, and your first shift cipher.
+\end{center}
+
+\begin{framed}
+Check one:\\
+
+\framebox(12,12){} I received help from the following classmate(s) on this assignment:\\
+
+\rule{15cm}{0.5pt}.\\
+
+\framebox(12,12){} I did not receive any help on this assignment.
+\end{framed}
+
+\section*{Homework Rules}
+\begin{itemize}
+	\item All work must be shown for full credit!
+	\item You may work with classmates, but be sure to turn in your own written solutions.  Write down the name(s) of anyone who helps you.
+	\item You can choose to use CoCalc code to help you solve the problems.  If you use code, please email the code by the deadline with subject line: ``Math 408 Mission 01"
+\end{itemize}
+
+
+\section{Graded Problems}
+
+\begin{enumerate}[1.]
+	\item Read the syllabus in detail.  Draw a picture of your favorite animal with a magnifying glass once you're done:
+	\begin{framed}
+	\vspace{1in}
+	\end{framed}
+	\item Do the FA17 Cryptography Intro Survey in your inbox.  I will get a notification when you're done, so no need to email me.\\
+	
+	\item This problem will help you set up a CoCalc account (\url{https://cocalc.com/})--this was formerly known as SageMath or Sage, so some of the names haven't changed yet.  Go to the website, and create a username and password.\\
+		\begin{enumerate}[a.]
+			\item Create a new project (Cryptography).  You can use this project folder to hold all of your CoCalc code.\\
+			\item You can use CoCalc to do basic math, assign things (like numbers) to variables, utilize inbuilt functions, create lists, etc.  Documentation is often helpful for programming.  Bookmark this page: \url{http://doc.sagemath.org/html/en/tutorial/index.html}.  If you are familiar with Python, you might notice that CoCalc/SageMath is Python-based and has some similarities.  One particularly useful documentation page for us is the one on Classical Cryptosystems: \url{http://doc.sagemath.org/html/en/reference/cryptography/sage/crypto/classical.html}.\\
+			\item In your CoCalc project, create a Sage worksheet (.sagews named) ``Mission01."  Read the section on shift cipher.  In ``Mission01," follow the documentation and write a short block of code which encrypts the message, ``The name is Bond, James Bond" with a shift of $k = 8$.  Note that punctuation is ignored.  Write the ciphertext here:
+		\begin{framed}
+		\vspace{1in}
+		\end{framed}
+		\end{enumerate}
+\end{enumerate}
+
+\section{Recommended Exercises}
+\noindent
+If you aren't familiar with programming at all, go through the ``Programming Basics" code (\url{https://tinyurl.com/ho-crypto-programmming-basics}).  You can copy the public file over to your own CoCalc project, and run the code.  In general, I will post .sagews files on Moodle too.
+	
+\end{document}

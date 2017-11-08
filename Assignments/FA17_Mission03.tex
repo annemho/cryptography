@@ -1,0 +1,131 @@
+\documentclass[12pt]{amsart}
+\pagestyle{plain}
+
+\usepackage{amsthm, setspace, framed, hyperref}
+\usepackage[pdftex]{graphicx}
+\usepackage{enumerate}
+
+\usepackage[left=1in, right=1in, top=1in, bottom=1in]{geometry}
+\setlength\parindent{0pt}
+
+\theoremstyle{plain}
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem*{cor}{Corollary}
+\newtheorem{quest}{Question}
+\theoremstyle{definition}
+\newtheorem*{defn}{Definition}
+\newtheorem*{ex}{Example}
+
+\begin{document}
+\title[]{Cryptography Mission 03 Dossier}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}l l}
+MATH/CSCI 408  & Name: \rule{7cm}{0.5pt} \\
+\hline\hline
+\end{tabular*} \\
+\maketitle
+
+\begin{center}\textbf{Deadline: Thursday, 7 September 2017 at 10:05am}\\
+
+This mission covers Sections 2.3, 2.4, and 2.6.
+\end{center}
+
+\begin{framed}
+Check one:\\
+
+\framebox(12,12){} I received help from the following classmate(s) on this assignment:\\
+
+\rule{15cm}{0.5pt}.\\
+
+\framebox(12,12){} I did not receive any help on this assignment.
+\end{framed}
+
+
+\section{Graded Problems}
+\begin{enumerate}[1.]
+\item (Vigen\`{e}re cipher) Suppose there is a language that has only the letters $a$, $b$, and $c$.  The frequency of the letter $a$ is .1, the frequency of $b$ is $.3$, and the frequency of $c$ is $.6$.  A message is encrypted using a Vigen\`{e}re cipher (working $\bmod 3$ instead of $\bmod 26$).  Suppose you are given the ciphertext $\texttt{CBBBCACACB}$.
+\begin{enumerate}[a.]
+	\item Make a Vigen\`{e}re cipher table using only $a$, $b$, and $c$.
+		\begin{framed}
+		\vspace{1.5in}
+		\end{framed}
+	\item Write out the three vectors $\vec{A}_0$ (corresponding to the frequencies of the letters with no shifts), $\vec{A}_1$ (correponding to the frequencies of the letters with one shift, starting with the frequency of ``c"), and $\vec{A}_2$ (correponding to the frequencies of the letters with two shifts, starting with the frequency of ``b").
+		\begin{framed}
+		\vspace{1.5in}
+		\end{framed}
+	\item Suppose you know that the key length is 2.  The next three parts will walk you through the steps to find the first letter of the key word.  First, circle every 1st, 3rd, 5th, etc. letter.  You should have a total of 5 letters circled.  Count the number of occurrences of $a$, $b$, and $c$ out of those five.
+		\begin{framed}
+		\vspace{.5in}
+		\end{framed}
+	\item Write a vector $\vec{W}$ of the frequencies of each of those letters from part c.
+		\begin{framed}
+		\vspace{.5in}
+		\end{framed}
+	\item Compute the dot products $\vec{W} \cdot \vec{A}_0, \vec{W} \cdot \vec{A}_1,$ and $\vec{W} \cdot \vec{A}_2.$  Which one of these is the highest number (which corresponds to the probability)?  Based on this, which letter is probably the first letter of the key word?
+		\begin{framed}
+		\vspace{1.3in}
+		\end{framed}
+	\end{enumerate}
+\item We're going to practice using some built-in functions for SageMath in this problem because you don't need to code everything from scratch!  
+		\begin{enumerate}[a.]
+		\item Go to \url{http://doc.sagemath.org/html/en/reference/cryptography/sage/crypto/classical.html}.  Read through the documentation of the TranspositionCipher.  In a sentence or two, describe what the Transposition Cipher does to a plaintext phrase:
+		\begin{framed}
+		\vspace{.7in}
+		\end{framed}
+		\item Use some SageMath code and the Transposition Cipher to encrypt: ``\texttt{BABOUTHEOCELOT}" (note that normally, we use lowercase for plaintext, but we need all caps for this particular line of code).
+		\begin{framed}
+		\vspace{1in}
+		\end{framed}
+		\item There is also a built-in Vigen\`{e}re cipher.  An example of how to decipher is as follows:\\ %modified from Kate Stange's problem
+		
+		\begin{verbatim}
+		alphabet = AlphabeticStrings() #Alphabet
+		ciphertext = alphabet.encoding("DILCSALPKIJGSTBP")  #Input ciphertext
+		system = VigenereCryptosystem(alphabet,5)  #Vigenere with length 5 key
+		key = alphabet("HELLO") #Input key
+		plaintext = system.deciphering(key, ciphertext)  #Decipher message
+		print plaintext #Display output
+		\end{verbatim}
+		
+		\vspace{.1in}		
+		Run this code (you can download and copy it from the .sagews document on Moodle).  Write down the plaintext here:
+		\begin{framed}
+		\vspace{.7in}
+		\end{framed}
+		\item Modify the Vigen\`{e}re cipher code to decrypt the following message: \\
+		
+		\texttt{XKMVYLFXGFEEDKBAFMVPXMARWGHDPGBAJXEIDQPUEXXFMCEEUTIJLZAULMSG\\
+		CIVYWAMDEPRKNBPKSIGSWGHFWQIKKTJKPZGNWFXYPOBUVBWFQBVTLXVIPLJO\\
+		LAXYPQEHGGIJDWYKLBXSPEVZZVEVDIE}\\
+		
+		with key word ``STERLING" (also see the .sagews document on Moodle to copy this ciphertext).  Email me your code with the plaintext.
+		\end{enumerate}		
+		\item 
+
+	\item Encrypt the plaintext ``\texttt{It was Greek to me}" using the Playfair cipher with key word ``SHAKESPEARE."\\
+		\begin{framed}
+		\vspace{3in}
+		\end{framed}
+	
+	\newpage \item (Honors) The way that we found the key length in the Vigen\`{e}re cipher is using the Kasiski analysis method.  Work through the example on this page: \url{http://crypto.interactive-maths.com/kasiski-analysis-breaking-the-code.html}.
+	\begin{enumerate}[a.]
+	\item Write down what the keyword is here:
+		\begin{framed}
+		\vspace{.5in}
+		\end{framed}
+	\item In a sentence or two, write something new that you learned from working through the details of the Kasiski analysis example.
+		\begin{framed}
+		\vspace{2in}
+		\end{framed}
+	\end{enumerate}
+	
+\end{enumerate}
+
+\section{Recommended Exercises}
+\noindent These will not be graded but are recommended if you need more practice.
+\begin{itemize}
+	\item Section 2.13: \# 10, 11
+	\item Section 2.14: \# 7, 9
+\end{itemize}
+	
+\end{document}

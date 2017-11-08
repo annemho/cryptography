@@ -1,0 +1,133 @@
+\documentclass[12pt]{amsart}
+\pagestyle{plain}
+
+\usepackage{amsthm, setspace, framed, hyperref}
+\usepackage[pdftex]{graphicx}
+\usepackage{enumerate}
+
+\usepackage[left=1in, right=1in, top=1in, bottom=1in]{geometry}
+\setlength\parindent{0pt}
+
+\theoremstyle{plain}
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem*{cor}{Corollary}
+\newtheorem{quest}{Question}
+\theoremstyle{definition}
+\newtheorem*{defn}{Definition}
+\newtheorem*{ex}{Example}
+
+\begin{document}
+\title[]{Cryptography Mission 05 Dossier}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}l l}
+MATH/CSCI 408  & Name: \rule{7cm}{0.5pt} \\
+\hline\hline
+\end{tabular*} \\
+\maketitle
+
+\begin{center}\textbf{Deadline: Thursday, 5 October 2017 at 10:50am}\\
+
+This mission covers Sections 3.1, 3.2, 3.3, 3.4, 3.6.
+\end{center}
+
+\begin{framed}
+Check one:\\
+
+\framebox(12,12){} I received help from the following classmate(s) on this assignment:\\
+
+\rule{15cm}{0.5pt}.\\
+
+\framebox(12,12){} I did not receive any help on this assignment.
+\end{framed}
+
+\section{Graded Problems}
+
+\begin{enumerate}[1.]
+\item Let $F_1 = 1, F_2 = 1, F_{n+1} = F_n + F_{n-1}$ define the Fibonacci numbers $1,1,2,3,5, \cdots$.
+		\begin{enumerate}[a.]
+			\item List the first 15 Fibonacci numbers.
+				\begin{framed}
+				\vspace{2in}
+				\end{framed}
+			\item Compute the greatest common divisor for the following pairs: $F_{10}$ and $F_7$, $F_6$ and $F_9$, $F_6$ and $F_{12}$, $F_{10}$ and $F_{13}$.
+				\begin{framed}
+				\vspace{2in}
+				\end{framed}
+			\newpage \item Look at your previous examples. It turns out that $\gcd(F_m,F_n) = F_{\gcd(m,n)}$.  Write out \textbf{two} specific and detailed examples to verify that you believe this is true.
+			\begin{framed}
+			\vspace{1in}
+			\end{framed}
+			\begin{framed}
+			\vspace{1in}
+			\end{framed}
+			\item Play with some examples, and make a conjecture about $\gcd(F_n,F_{n-1})$ for $n \geq 1$.  Are there any patterns?  Describe them here.
+			\begin{framed}
+			\vspace{2.5in}
+			\end{framed}
+		\end{enumerate}
+	\item
+    	\begin{enumerate}[a.]
+        	\item Use the Euclidean algorithm to compute $\gcd(8207,4811)$.
+            \begin{framed}
+            \vspace{2in}
+            \end{framed}
+        \newpage \item Factor 8207 and 4811 by using CoCal's \texttt{factor(a,b)}.  In a sentence or two, explain why the Euclidean algorithm is the faster method of computing the gcd (rather than factoring and using the definition of gcd).
+        	\begin{framed}
+            \vspace{1.2in}
+            \end{framed}
+        \end{enumerate}
+    \item You can also compute a gcd using CoCalc's \texttt{gcd(a,b)}.  For this problem, determine the solution for the following gcd computations.
+		\begin{enumerate}[a.]
+			\item $\gcd(234,6013)$
+			\begin{framed}
+			\vspace{.3in}
+			\end{framed}
+			\item $\gcd(74951,26269)$
+			\begin{framed}
+			\vspace{.3in}
+			\end{framed}
+			\item $\gcd(5223389,188434513)$
+			\begin{framed}
+			\vspace{.3in}
+			\end{framed}
+		\end{enumerate}
+\item (Fermat's Little Theorem and Euler's Theorem) Recall that $(a^b)^c = a^{bc}$.  Compute each of the following without a calculator or computer (you can double-check with code).
+		\begin{enumerate}[a.]
+			\item $\varphi(35)$
+			\begin{framed}
+			\vspace{.5in}
+			\end{framed}
+			\item $514^{372} \mod 13$
+			\begin{framed}
+			\vspace{.5in}
+			\end{framed}
+			\item $2^{49} \mod 15$
+			\begin{framed}
+			\vspace{.5in}
+			\end{framed}
+		\end{enumerate}
+\item (Honors) This problem is going to walk you through another way of thinking about the proof of Fermat's Little Theorem but using combinatorics.  Recall that we have $a^{p-1} \equiv 1 \bmod p$ for a number $a$ and a prime $p$ in which $\gcd(a,p) = 1$.  This can be rewritten as $a^p \equiv a \bmod p$ or that $a^p - a$ is divisible by $p$.
+	\begin{enumerate}[a.]
+    	\item Suppose $p = 5$.  Consider all the possible strings of $p = 5$ symbols, using an alphabet with $a = 2$ different symbols. For example, if your letters are $A$ and $B$, then a possible string is $ABAAA$.  How many different strings are there? List them.
+        	\begin{framed}
+            \vspace{2in}
+        	\end{framed}
+        \item Think of each letter in the string as a bead, and tie them into a ``necklace."  If you rotate one necklace corresponding to a string and get another string, they are considered the same.  For example: $ABAAA$ and $AABAA$ form the same necklace.  Group your necklaces together.  How many unique necklaces are there?
+        	\begin{framed}
+            \vspace{1in}
+        	\end{framed}
+       \item Notice that $2$ of the strings only have one letter of the alphabet.  All of the other necklaces have 5 strings.  So this shows that $2^5 - 2$ is divisible by $5$.  Use this reasoning and a sentence or two to explain how this proves Fermat's Little Theorem in general.
+        	\begin{framed}
+            \vspace{1in}
+        	\end{framed}
+	\end{enumerate}
+\end{enumerate}
+
+\section{Recommended Exercises}
+\noindent These will not be graded but are recommended if you need more practice.
+\begin{itemize}
+	\item Section 3.13: \# 1, 3, 5, 7, 9, 15
+	\item Section 3.14: \# 1, 5, 7
+\end{itemize}
+	
+\end{document}

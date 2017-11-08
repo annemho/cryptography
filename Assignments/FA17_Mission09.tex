@@ -1,0 +1,102 @@
+\documentclass[12pt]{amsart}
+\pagestyle{plain}
+
+\usepackage{amsthm, setspace, framed, hyperref}
+\usepackage[pdftex]{graphicx}
+\usepackage{enumerate}
+\usepackage[none]{hyphenat}
+
+\usepackage[left=1in, right=1in, top=1in, bottom=1in]{geometry}
+\setlength\parindent{0pt}
+
+\theoremstyle{plain}
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem*{cor}{Corollary}
+\newtheorem{quest}{Question}
+\theoremstyle{definition}
+\newtheorem*{defn}{Definition}
+\newtheorem*{ex}{Example}
+
+\begin{document}
+\title[]{Cryptography Mission 09}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}l l}
+MATH/CSCI 408  & Name: \rule{7cm}{0.5pt} \\
+\hline\hline
+\end{tabular*} \\
+\maketitle
+
+\begin{center}\textbf{Deadline: Thursday, 9 November 2017 at 10:50am}\\
+
+This mission covers Sections 7.1, 7.2, and 7.5
+\end{center}
+
+\begin{framed}
+Check one:\\
+
+\framebox(12,12){} I received help from the following classmate(s) on this assignment:\\
+
+\rule{15cm}{0.5pt}.\\
+
+\framebox(12,12){} I did not receive any help on this assignment.
+\end{framed}
+
+
+\section{Graded Problems}
+
+\begin{enumerate}[1.]
+	\item (Final Project) Provide a document with your brainstorming ideas and logistics (electronic submission or paper submission are both fine).  Some ideas of things to address:
+    \begin{itemize}
+    	\item What is the format of your presentation?
+		\item What is the mathematical content in your project (this is required)?
+        \item Who are you going to invite, and how are you going to convince them to show up?  Note: one of the projects involves advertising.
+        \item There will be tables, and Dr. Ho can provide poster boards to the groups that had requested them. If you're using a computer, are there enough outlets in the space (go check it out)?  If not, make sure you have your devices charged ahead of time.
+        \item For those of you who have thought about prizes or other supplies, who exactly do you need to contact?  How are you going to contact them and by when?
+        \item Do you have a clear sense of how you're communicating with your team members?  Have you organized logistics?\\
+    \end{itemize}
+    \item For each of the following, determine the parity of $x$ in the discrete log problem $$\alpha^x \equiv \beta \bmod p.$$  Then, depending on the parity, write some code (and email it) to do a brute-force search through only the even or only the odd numbers to find all values of $x$ up to the prime $p$.
+    	\begin{enumerate}[a.]
+        	\item $5^x \equiv 75 \bmod 107$
+            \begin{framed}
+            \vspace{1.2in}
+            \end{framed}
+            \item $11^{23} \equiv 98 \bmod 349$
+            \begin{framed}
+            \vspace{1.2in}
+            \end{framed}
+        \end{enumerate}
+     
+    \item Use the Baby Step, Giant Step algorithm to determine $x$ for $4^x \equiv 20 \bmod 61$.
+    \begin{framed}
+    \vspace{2.5in}
+    \end{framed}
+    \item ElGamal
+    \begin{enumerate}[a.]
+    	\item Mallory is sending Sterling Archer a message using ElGamal.  His public key is $(p,\alpha,\beta) = (89,6,31)$.  If Mallory's message is $m = 77$ and she chooses $k = 3$, show the encryption process to determine $r$ and $t$.
+        \begin{framed}
+        \vspace{1in}
+        \end{framed}
+        \item What is the computation Archer does to decrypt the message?  Verify that this equals the original message of $m = 77$.
+        \begin{framed}
+        \vspace{1in}
+        \end{framed}
+        \item Cheryl and Pam are also sending their own ElGamal message but they use $p = 17$ and $\alpha = 3$.  Pam chooses her secret to be $a = 6$, so $\beta = 15$.  Cheryl sends the ciphertext $(r,t) = (7,6)$.  Determine the plaintext $m$.
+        \begin{framed}
+        \vspace{1in}
+        \end{framed}
+    \end{enumerate}
+    \item (Honors) When proving the Index Calculus method in class for the Discrete Log problem, we showed that $$\beta \alpha^r = \prod_i p_i^{b_i} \bmod p \text{ implies } L_{\alpha}^{\beta} = -r + \sum_i b_i L_{\alpha}(p_i) \bmod (p-1)$$ where $L_{\alpha}$ denotes the log base $\alpha$ function.  Show the missing steps to get from the first to the second equation. (Hint: use properties of the log function).
+	\begin{framed}
+    \vspace{3in}
+    \end{framed}
+
+\end{enumerate}
+	
+    
+\section{Recommended Exercises}
+\noindent These will not be graded but are recommended if you need more practice.
+\begin{itemize}
+	\item Section 7.6 \# 1, 2, 3, 4, 6, 12
+    \item Section 7.7 \# 1, 2, 3
+\end{itemize}
+\end{document}

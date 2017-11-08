@@ -1,0 +1,126 @@
+\documentclass[12pt]{amsart}
+\pagestyle{plain}
+
+\usepackage{amsthm, setspace, framed, hyperref}
+\usepackage[pdftex]{graphicx}
+\usepackage{enumerate}
+
+\usepackage[left=1in, right=1in, top=1in, bottom=1in]{geometry}
+\setlength\parindent{0pt}
+
+\theoremstyle{plain}
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem*{cor}{Corollary}
+\newtheorem{quest}{Question}
+\theoremstyle{definition}
+\newtheorem*{defn}{Definition}
+\newtheorem*{ex}{Example}
+
+\begin{document}
+\title[]{Cryptography Mission 06}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}l l}
+MATH/CSCI 408  & Name: \rule{7cm}{0.5pt} \\
+\hline\hline
+\end{tabular*} \\
+\maketitle
+
+\begin{center}\textbf{Deadline: Thursday, 12 October 2017 at 10:50am}\\
+
+This mission covers Sections 3.7, 3.9, 3.10, 4.1, 4.2.
+\end{center}
+
+\section{Graded Problems}
+
+\begin{enumerate}[1.]
+\item Write a short \texttt{for} loop program in CoCalc to compute powers of a number $a \bmod p$ where $p$ is a prime. In other words, the input of your code should be $a$ and $p$.  The output should be all powers of $a^i \bmod p$ for $i = 1, 2, \cdots, p-1$.  Email this code to Dr. Ho.\\
+\item Using the previous problem, are the following values are primitive roots (i.e. the order is $p-1)$ or not?
+	\begin{enumerate}[a.]
+	\item $a = 4, p = 23$
+    	\begin{framed}
+    	\vspace{.3in}
+		\end{framed}
+    \item $a = 5, p = 47$
+    	\begin{framed}
+    	\vspace{.3in}
+		\end{framed}
+    \end{enumerate}
+\item Given an integer $a$ and an odd prime $p$.  Determine if $a$ is a quadratic residue mod $p$ or not.  Justify.
+	\begin{enumerate}[a.]
+		\item $a = 4, p = 11$
+		\begin{framed}
+		\vspace{.5in}
+		\end{framed}
+		\item $a = 2, p = 19$
+		\begin{framed}
+		\vspace{.5in}
+		\end{framed}
+		\item $a = 3, p = 29$
+		\begin{framed}
+		\vspace{.5in}
+		\end{framed}
+	\end{enumerate}
+	\item Given an integer $a$ (not congruent to 0 $\mod p$) and an odd prime $p$, recall that the Legendre symbol is defined as: 
+	\[ \left( \frac{a}{p}\right) = \begin{cases} 
+      1 & a \text{ is a quadratic residue } \bmod p \\
+      -1 & a \text{ is a quadratic non-residue } \bmod p \\
+   \end{cases}
+	\]
+	Evaluate the following by using CoCalc's \texttt{kronecker(a,b)} function, which is the same as the Legendre symbol:
+	\begin{enumerate}[a.]
+		\item $\left( \frac{7}{13} \right)$
+		\begin{framed}
+		\vspace{.3in}
+		\end{framed}
+		\item $\left( \frac{7}{19} \right)$
+		\begin{framed}
+		\vspace{.3in}
+		\end{framed}
+		\item $\left( \frac{2}{13} \right)$
+		\begin{framed}
+		\vspace{.3in}
+		\end{framed}
+		\item $\left( \frac{14}{13} \right)$
+		\begin{framed}
+		\vspace{1in}
+		\end{framed}
+	\end{enumerate}
+	\item Recall that the Law of Quadratic Reciprocity says:  Let $p$ and $q$ be odd primes.  Then
+		\[ \left( \frac{p}{q}\right) = \begin{cases} 
+      		\left( \frac{q}{p}\right) & p \equiv 1 \bmod 4 \text{ or } q \equiv 1 \bmod 4\\
+      		-\left(\frac{q}{p}\right) & p \equiv q \equiv 3 \bmod 4\\
+  		 \end{cases}
+		\]
+		Compute the following.  Be sure to show all work.
+		\begin{enumerate}[a.]
+		\item  Compute $\left(\frac{97}{101}\right)$.
+		\begin{framed}
+		\vspace{.3in}
+		\end{framed}
+		\item Explain using Quadratic Reciprocity what the value will be for $\left(\frac{101}{97}\right)$.
+		\begin{framed}
+		\vspace{.5in}
+		\end{framed}
+		\newpage \item Compute $\left(\frac{3}{107}\right)$
+		\begin{framed}
+		\vspace{.3in}
+		\end{framed}
+		\item Explain using Quadratic Reciprocity what the value will be for $\left(\frac{107}{3}\right)$
+		\begin{framed}
+		\vspace{.5in}
+		\end{framed}
+		\end{enumerate}
+\item Play with the Simplified DES code (written by Dr. N. McNew at Towson): \url{https://tinyurl.com/fa17-crypto-DES}. Specifically, type in a 12-bit input \texttt{100100100100}, a key $K$ = \texttt{111111110}, and 7 rounds.  Write your output here:
+		\begin{framed}
+		\vspace{.5in}
+		\end{framed}
+\item (Honors) Read Section 4.7 (Meet-in-the-Middle Attacks) and summarize what you learned in a paragraph or two:
+	\begin{framed}
+    \vspace{3in}
+    \end{framed}
+
+
+
+\end{enumerate}
+	
+\end{document}

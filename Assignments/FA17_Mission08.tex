@@ -1,0 +1,89 @@
+\documentclass[12pt]{amsart}
+\pagestyle{plain}
+
+\usepackage{amsthm, setspace, framed, hyperref}
+\usepackage[pdftex]{graphicx}
+\usepackage{enumerate}
+\usepackage[none]{hyphenat}
+
+\usepackage[left=1in, right=1in, top=1in, bottom=1in]{geometry}
+\setlength\parindent{0pt}
+
+\theoremstyle{plain}
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem*{cor}{Corollary}
+\newtheorem{quest}{Question}
+\theoremstyle{definition}
+\newtheorem*{defn}{Definition}
+\newtheorem*{ex}{Example}
+
+\begin{document}
+\title[]{Cryptography Mission 08}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}l l}
+MATH/CSCI 408  & Name: \rule{7cm}{0.5pt} \\
+\hline\hline
+\end{tabular*} \\
+\maketitle
+
+\begin{center}\textbf{Deadline: Thursday, 2 November 2017 at 10:50am}\\
+
+This mission covers Sections 6.1, 6.2, 6.3, and 6.4.
+\end{center}
+
+\begin{framed}
+Check one:\\
+
+\framebox(12,12){} I received help from the following classmate(s) on this assignment:\\
+
+\rule{15cm}{0.5pt}.\\
+
+\framebox(12,12){} I did not receive any help on this assignment.
+\end{framed}
+
+
+\section{Graded Problems}
+
+\begin{enumerate}[1.]
+	\item (Final Project) Write down a short paragraph summary of your project and any team members here.  Remember that Dr. Ho assigned you a general topic, but you can choose your own team or work individually within that group.
+    \begin{framed}
+    \vspace{2.5in}
+    \end{framed}
+    \item Work through the RSA code here: \url{https://tinyurl.com/fa17-crypto-rsa}.  Notice that if you run the code multiple times, you will end up getting different encrypted text.
+    \begin{enumerate}[a.]
+    \item In a sentence or two, explain why this is:
+   \begin{framed}
+	\vspace{.5in}
+	\end{framed}
+    \item Encrypt a one-line phrase, and email the input and output to Dr. Ho (please don't write this one by hand!).
+	\end{enumerate}
+    \item Part of the RSA lectures was a claim that we can factor $n = pq$ by just knowing $n$ and $\varphi(n)$.  We do this by setting up the quadratic equation $X^2 - (n - \varphi(n) + 1)X + n$ and solving for its roots.  Write out the details of how you would do this for $n = 27679$.  You can use CoCalc for the Euler phi function, but show the details of the rest of your work.
+		\begin{framed}
+		\vspace{2in}
+		\end{framed}
+   \item Read through the Miller-Rabin Primality Test (6.3 p. 178).  Work through the example.  Then, use the primality test for $n = 101$.
+		\begin{framed}
+		\vspace{2in}
+		\end{framed}
+	\item Use the Fermat Factoring method to factor 70747.
+		\begin{framed}
+		\vspace{2in}
+		\end{framed}
+	\item Use the $p-1$ Factoring Algorithm to factor 4757. You can use CoCalc to help with the computations.
+		\begin{framed}
+		\vspace{3in}
+		\end{framed}
+	\item (Honors) Read Sections 6.5 (The RSA Challenge) and 6.6 (An Application to Treaty Verification).  Summarize both sections in a short paragraph each.
+    	\begin{framed}
+		\vspace{3in}
+		\end{framed}
+\end{enumerate}
+
+\section{Recommended Exercises}
+\noindent These will not be graded but are recommended if you need more practice.
+\begin{itemize}
+	\item Section 6.8: \# 1, 3, 5, 7, 13, 19
+    \item Section 6.9 \# 1, 2, 5, 7
+\end{itemize}
+	
+\end{document}
