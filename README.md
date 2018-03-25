@@ -48,4 +48,4 @@ Other presentations:
 
 Other lecture notes are currently handwritten and might be added in the future 
 (either as scans or as .tex files). Please contact me (currently at 
-aho@coastal.edu) with any questions.
+aho5@utk.edu) with any questions.
